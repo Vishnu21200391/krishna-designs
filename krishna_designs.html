@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Krishna Designs — Premium Blouse & Embroidery, Eluru</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--maroon:#800020;--maroon-hover:#9a0028;--maroon-dark:#5c0016;--gold:#D4AF37;--gold-light:#e8c84a;--gold-dark:#a8891d;--beige:#F8F4EC;--beige-dark:#ede8da;--white:#fff;--text:#1a0a0f;--text-mid:#5a3040;--text-muted:#9a7080}
+html{scroll-behavior:smooth}
+body{font-family:'Cormorant Garamond',serif;background:var(--white);color:var(--text);min-height:100vh}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--beige)}::-webkit-scrollbar-thumb{background:var(--maroon);border-radius:3px}
+.nav{position:sticky;top:0;z-index:200;background:rgba(255,255,255,.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,175,55,.25);height:64px;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--maroon);cursor:pointer;user-select:none}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-link{background:none;border:none;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--text-mid);padding:4px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.nav-link:hover,.nav-link.active{color:var(--maroon);border-bottom-color:var(--gold)}
+.nav-right{display:flex;gap:8px;align-items:center}
+.btn-ghost{background:none;border:1px solid var(--beige-dark);color:var(--text-mid);padding:7px 14px;border-radius:2px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:15px;transition:all .2s}
+.btn-ghost:hover{border-color:var(--maroon);color:var(--maroon)}
+.btn-solid{background:var(--maroon);color:#fff;border:none;padding:7px 16px;border-radius:2px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:15px;transition:background .2s}
+.btn-solid:hover{background:var(--maroon-hover)}
+.mob-toggle{display:none;background:none;border:none;font-size:24px;cursor:pointer;color:var(--maroon)}
+.hero{background:linear-gradient(135deg,var(--maroon-dark) 0%,var(--maroon) 50%,#6b0019 100%);padding:4.5rem 1.5rem;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;pointer-events:none;background-image:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(212,175,55,.04) 40px,rgba(212,175,55,.04) 41px)}
+.hero-inner{max-width:960px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center;position:relative;z-index:1}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(212,175,55,.12);border:1px solid rgba(212,175,55,.3);color:#e8c84a;font-size:11px;letter-spacing:2px;text-transform:uppercase;padding:6px 14px;border-radius:1px;margin-bottom:1.25rem}
+.hero h1{font-family:'Playfair Display',serif;font-size:40px;font-weight:700;color:#fff;line-height:1.12;margin-bottom:1.1rem}
+.hero h1 em{color:var(--gold);font-style:italic}
+.hero-sub{color:rgba(255,255,255,.72);font-size:17px;font-weight:300;line-height:1.7;margin-bottom:1.75rem}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-gold{background:var(--gold);color:var(--text);border:none;padding:12px 28px;border-radius:2px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:500;transition:all .2s}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-outline-w{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);padding:12px 28px;border-radius:2px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:17px;transition:all .2s}
+.btn-outline-w:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:1.25rem}
+.stat-box{text-align:center;padding:.9rem;background:rgba(255,255,255,.07);border:1px solid rgba(212,175,55,.18);border-radius:2px}
+.stat-num{font-family:'Playfair Display',serif;font-size:26px;color:var(--gold);font-weight:700}
+.stat-lbl{font-size:11px;color:rgba(255,255,255,.5);letter-spacing:.5px;margin-top:2px}
+.hero-cards{display:flex;flex-direction:column;gap:10px}
+.hero-card{background:rgba(255,255,255,.07);border:1px solid rgba(212,175,55,.2);border-radius:4px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:12px}
+.hero-card-icon{width:44px;height:44px;flex-shrink:0;background:rgba(212,175,55,.12);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.hero-card strong{font-size:14px;color:#fff;display:block}.hero-card span{font-size:12px;color:rgba(255,255,255,.5)}
+.banner{background:var(--maroon);color:#fff;padding:1rem 1.5rem;text-align:center}
+.banner-inner{max-width:960px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:24px;flex-wrap:wrap}
+.banner-item{display:flex;align-items:center;gap:7px;font-size:13px;color:rgba(255,255,255,.88)}
+.section{padding:4rem 1.5rem}.section.bg-beige{background:var(--beige)}
+.section-inner{max-width:960px;margin:0 auto}.section-inner.narrow{max-width:700px}
+.section-head{text-align:center;margin-bottom:2.5rem}
+.section-tag{display:inline-block;font-size:11px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-dark);margin-bottom:.6rem}
+.section-head h2{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;color:var(--text);margin-bottom:.4rem}
+.section-head p{color:var(--text-muted);font-size:17px;font-weight:300}
+.gold-line{width:60px;height:2px;background:var(--gold);margin:.9rem auto 0}
+.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.step-box{text-align:center}
+.step-icon{width:54px;height:54px;background:var(--maroon);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-size:22px;box-shadow:0 4px 12px rgba(128,0,32,.25)}
+.step-num{display:inline-block;background:var(--gold);color:var(--text);font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;margin-bottom:7px;letter-spacing:.5px}
+.step-box h3{font-family:'Playfair Display',serif;font-size:15px;margin-bottom:5px}
+.step-box p{font-size:13px;color:var(--text-muted);font-weight:300;line-height:1.6}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.cat-card{background:var(--white);border:1px solid var(--beige-dark);border-radius:4px;padding:1.5rem 1.1rem;cursor:pointer;transition:all .25s;text-align:center;position:relative;overflow:hidden}
+.cat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--gold);transform:scaleX(0);transition:transform .3s;transform-origin:left}
+.cat-card:hover{border-color:var(--gold);transform:translateY(-3px);box-shadow:0 4px 24px rgba(128,0,32,.10)}
+.cat-card:hover::after{transform:scaleX(1)}
+.cat-icon{width:56px;height:56px;background:var(--beige);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto .9rem;font-size:26px}
+.cat-card h3{font-family:'Playfair Display',serif;font-size:16px;color:var(--text);margin-bottom:3px}
+.cat-card p{font-size:13px;color:var(--text-muted);font-weight:300}
+.cat-count{display:inline-block;margin-top:8px;font-size:11px;letter-spacing:1px;color:var(--gold-dark);text-transform:uppercase}
+.gallery-filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:1.75rem;justify-content:center}
+.filter-btn{background:none;border:1px solid var(--beige-dark);color:var(--text-mid);padding:6px 16px;border-radius:100px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:14px;transition:all .2s}
+.filter-btn:hover,.filter-btn.active{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+.designs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.design-card{background:var(--white);border:1px solid var(--beige-dark);border-radius:4px;overflow:hidden;cursor:pointer;transition:all .25s}
+.design-card:hover{box-shadow:0 12px 40px rgba(128,0,32,.18);transform:translateY(-4px);border-color:rgba(212,175,55,.4)}
+.design-img{height:180px;position:relative;display:flex;align-items:center;justify-content:center;font-size:60px}
+.design-badge{position:absolute;top:9px;left:9px;background:var(--maroon);color:#fff;font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:3px 8px;border-radius:1px}
+.day-badge{position:absolute;bottom:9px;left:9px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;padding:3px 8px;border-radius:100px}
+.wish-btn{position:absolute;top:9px;right:9px;width:30px;height:30px;background:rgba(255,255,255,.92);border:none;border-radius:50%;cursor:pointer;font-size:15px;transition:transform .2s}
+.wish-btn:hover{transform:scale(1.15)}
+.design-body{padding:1rem}
+.design-body h3{font-family:'Playfair Display',serif;font-size:15px;color:var(--text);margin-bottom:3px}
+.design-body p{font-size:12px;color:var(--text-muted)}
+.design-meta{display:flex;justify-content:space-between;align-items:center;margin:8px 0}
+.design-price{font-size:18px;font-weight:500;color:var(--maroon)}
+.design-price small{font-size:11px;color:var(--text-muted);font-weight:300}
+.day-pill{font-size:11px;padding:2px 8px;border-radius:100px;font-weight:600}
+.btn-view{width:100%;background:transparent;border:1px solid var(--maroon);color:var(--maroon);padding:8px;border-radius:2px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:14px;transition:all .2s}
+.btn-view:hover{background:var(--maroon);color:#fff}
+.modal-overlay{position:fixed;inset:0;background:rgba(26,10,15,.65);z-index:500;display:flex;align-items:center;justify-content:center;padding:1.5rem}
+.modal{background:#fff;border-radius:6px;width:100%;max-width:620px;max-height:88vh;overflow-y:auto;position:relative;animation:mIn .25s ease}
+@keyframes mIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:scale(1)}}
+.modal-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:76px}
+.modal-body{padding:1.5rem}
+.modal-body h2{font-family:'Playfair Display',serif;font-size:22px;margin-bottom:.4rem}
+.modal-tags{display:flex;gap:7px;flex-wrap:wrap;margin:1rem 0}
+.tag{font-size:12px;padding:3px 11px;background:var(--beige);border-radius:100px;color:var(--text-mid)}
+.modal-close{position:absolute;top:11px;right:11px;width:34px;height:34px;background:rgba(255,255,255,.9);border:none;border-radius:50%;cursor:pointer;font-size:17px;display:flex;align-items:center;justify-content:center}
+.upload-box{border:2px dashed var(--beige-dark);border-radius:4px;padding:1.25rem;text-align:center;cursor:pointer;transition:border-color .2s;margin:.6rem 0}
+.upload-box:hover{border-color:var(--gold)}
+.upload-box span{font-size:12px;color:var(--text-muted);display:block;margin-top:5px}
+.modal-actions{display:flex;gap:10px;margin-top:1.25rem}
+.btn-maroon{flex:1;background:var(--maroon);color:#fff;border:none;padding:12px;border-radius:2px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:16px;transition:background .2s}
+.btn-maroon:hover{background:var(--maroon-hover)}
+.btn-outlined{flex:1;background:transparent;color:var(--maroon);border:1px solid var(--maroon);padding:12px;border-radius:2px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:16px;transition:all .2s}
+.btn-outlined:hover{background:var(--maroon);color:#fff}
+.modal-lbl{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);margin:12px 0 5px;display:block}
+.special-note{width:100%;padding:10px 13px;border:1px solid var(--beige-dark);border-radius:2px;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--text);background:var(--beige);resize:vertical;min-height:75px;outline:none}
+.special-note:focus{border-color:var(--gold)}
+.card{background:#fff;border:1px solid var(--beige-dark);border-radius:6px;padding:1.75rem}
+.track-row{display:flex;gap:9px;margin-bottom:1.5rem}
+.track-input{flex:1;padding:10px 14px;border:1px solid var(--beige-dark);border-radius:2px;font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--text);background:var(--beige);outline:none;transition:border-color .2s}
+.track-input:focus{border-color:var(--gold)}
+.btn-track{background:var(--maroon);color:#fff;border:none;padding:10px 24px;border-radius:2px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:16px}
+.order-meta{display:flex;flex-wrap:wrap;gap:10px;background:var(--beige);border-radius:4px;padding:.9rem 1.1rem;margin-bottom:1.75rem;justify-content:space-between}
+.meta-item .mlbl{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted)}
+.meta-item .mval{font-family:'Playfair Display',serif;font-size:15px;color:var(--text);margin-top:2px}
+.mval.red{color:var(--maroon)}
+.timeline{padding-left:2.4rem;position:relative}
+.timeline::before{content:'';position:absolute;left:14px;top:12px;bottom:12px;width:2px;background:var(--beige-dark)}
+.tl-row{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:1.5rem;position:relative}
+.tl-row:last-child{margin-bottom:0}
+.tl-dot{position:absolute;left:-2.4rem;width:30px;height:30px;border-radius:50%;border:2px solid var(--beige-dark);background:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.tl-row.done .tl-dot{background:var(--maroon);border-color:var(--maroon)}
+.tl-row.active .tl-dot{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 4px rgba(212,175,55,.2)}
+.tl-lbl{font-size:14px;font-weight:500;color:var(--text)}
+.tl-row.done .tl-lbl{color:var(--text-muted);font-weight:400}
+.tl-row.active .tl-lbl{color:var(--maroon)}
+.tl-sub{font-size:12px;color:var(--text-muted);font-weight:300;margin-top:2px}
+.tl-date{font-size:11px;color:var(--gold-dark);margin-top:3px}
+.meas-tabs{display:flex;border-bottom:2px solid var(--beige-dark);margin-bottom:1.75rem}
+.meas-tab{padding:9px 20px;background:none;border:none;font-family:'Cormorant Garamond',serif;font-size:16px;cursor:pointer;color:var(--text-muted);border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.meas-tab.active{color:var(--maroon);border-bottom-color:var(--maroon);font-weight:500}
+.meas-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.meas-field{background:var(--beige);border-radius:2px;padding:9px 13px}
+.meas-label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);display:block;margin-bottom:4px}
+.meas-input{width:100%;background:none;border:none;border-bottom:1px solid var(--beige-dark);font-family:'Cormorant Garamond',serif;font-size:16px;color:var(--text);padding:3px 0;outline:none}
+.meas-input:focus{border-bottom-color:var(--gold)}
+.btn-save{width:100%;margin-top:1.1rem;background:var(--maroon);color:#fff;border:none;padding:12px;border-radius:2px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:16px}
+.btn-save:hover{background:var(--maroon-hover)}
+.hint-box{padding:10px 13px;background:var(--beige);border-radius:2px;font-size:13px;color:var(--text-muted);margin-top:.9rem;font-weight:300;border-left:3px solid var(--gold)}
+.appt-lbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:9px;display:block}
+.pill-group{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:1.25rem}
+.pill{padding:7px 18px;border:1px solid var(--beige-dark);background:none;color:var(--text-mid);border-radius:100px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:14px;transition:all .2s}
+.pill:hover{border-color:var(--maroon);color:var(--maroon)}
+.pill.active{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+.pill.disabled{opacity:.4;cursor:not-allowed}
+.date-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;margin-bottom:1.25rem}
+.date-head{text-align:center;font-size:10px;color:var(--text-muted);padding:3px 0}
+.date-cell{text-align:center;padding:7px 3px;border:1px solid var(--beige-dark);border-radius:2px;font-size:13px;cursor:pointer;transition:all .2s}
+.date-cell:hover:not(.past){border-color:var(--gold);background:rgba(212,175,55,.08)}
+.date-cell.sel{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+.date-cell.past{opacity:.35;cursor:not-allowed}
+.appt-summary{background:var(--beige);border-radius:4px;padding:.9rem 1.1rem;margin-bottom:.9rem;font-size:14px;line-height:1.7;border-left:3px solid var(--gold)}
+.cart-item{display:flex;align-items:center;gap:.9rem;padding:.9rem 0;border-bottom:1px solid var(--beige-dark)}
+.cart-item-img{width:58px;height:58px;border-radius:2px;background:var(--beige);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.cart-item-name{font-family:'Playfair Display',serif;font-size:15px}
+.cart-item-price{font-size:16px;color:var(--maroon);font-weight:500;margin-top:3px}
+.cart-item-remove{margin-left:auto;background:none;border:none;cursor:pointer;color:var(--text-muted);font-size:18px;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.coupon-row{display:flex;gap:9px;margin:1rem 0}
+.coupon-input{flex:1;padding:9px 13px;border:1px solid var(--beige-dark);border-radius:2px;font-family:'Cormorant Garamond',serif;font-size:15px;color:var(--text);background:var(--beige);outline:none}
+.coupon-input:focus{border-color:var(--gold)}
+.btn-apply{background:none;border:1px solid var(--maroon);color:var(--maroon);padding:9px 16px;border-radius:2px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:15px;transition:all .2s}
+.btn-apply:hover{background:var(--maroon);color:#fff}
+.price-breakdown{background:var(--beige);border-radius:4px;padding:1.1rem}
+.price-row{display:flex;justify-content:space-between;font-size:14px;padding:4px 0}
+.price-row.disc{color:green}
+.price-row.total{border-top:1px solid var(--beige-dark);margin-top:7px;padding-top:10px;font-family:'Playfair Display',serif;font-size:19px;color:var(--maroon)}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.test-card{background:#fff;border:1px solid var(--beige-dark);border-radius:4px;padding:1.4rem}
+.test-stars{color:var(--gold);font-size:17px;margin-bottom:.6rem}
+.test-card blockquote{font-size:15px;font-weight:300;line-height:1.7;color:var(--text-mid);margin-bottom:.9rem;font-style:italic}
+.test-name{font-size:13px;font-weight:500;color:var(--text)}
+.shop-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.table-wrap{overflow-x:auto}
+table.data-table{width:100%;border-collapse:collapse;font-size:14px}
+table.data-table th{text-align:left;padding:9px 13px;font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-muted);border-bottom:2px solid var(--beige-dark);font-weight:500;white-space:nowrap}
+table.data-table td{padding:11px 13px;border-bottom:1px solid var(--beige)}
+table.data-table tr:hover td{background:var(--beige)}
+.status-badge{display:inline-block;padding:3px 9px;border-radius:100px;font-size:11px}
+.badge-pending{background:#fff8e1;color:#b45309}
+.badge-progress{background:#e0f0ff;color:#1d5fa4}
+.badge-ready{background:#e0ffe8;color:#1a7a36}
+.badge-delivered{background:var(--beige);color:var(--text-muted)}
+.status-select{background:var(--beige);border:1px solid var(--beige-dark);border-radius:2px;padding:4px 9px;font-family:'Cormorant Garamond',serif;font-size:13px;color:var(--text);cursor:pointer;outline:none}
+.icon-btn{background:none;border:none;cursor:pointer;font-size:15px;color:var(--text-muted);padding:3px;border-radius:2px}
+.login-box{background:#fff;border-radius:8px;padding:2.25rem;width:100%;max-width:420px;box-shadow:0 8px 32px rgba(128,0,32,.10);border:1px solid var(--beige-dark)}
+.login-logo{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--maroon);text-align:center}
+.login-logo span{color:var(--gold)}
+.otp-inputs{display:flex;gap:7px;justify-content:center;margin-bottom:1.5rem}
+.otp-inp{width:42px;height:50px;text-align:center;font-family:'Playfair Display',serif;font-size:21px;font-weight:700;border:1px solid var(--beige-dark);border-radius:4px;background:var(--beige);outline:none;color:var(--maroon)}
+.otp-inp:focus{border-color:var(--gold)}
+.admin-wrap{background:#f9f6f1;min-height:100vh}
+.admin-topbar{background:var(--maroon-dark);color:#fff;padding:.7rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px}
+.admin-tabs{display:flex;gap:0;overflow-x:auto;border-bottom:2px solid var(--beige-dark);background:#fff;border-radius:6px 6px 0 0;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+.admin-tab{padding:11px 16px;background:none;border:none;font-family:'Cormorant Garamond',serif;font-size:14px;cursor:pointer;color:var(--text-muted);border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s}
+.admin-tab.active{color:var(--maroon);border-bottom-color:var(--maroon);font-weight:600}
+.dash-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:1.5rem}
+.dash-card{background:#fff;border:1px solid var(--beige-dark);border-radius:6px;padding:1.1rem 1.3rem;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.dash-card .dlbl{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);margin-bottom:7px}
+.dash-card .dval{font-family:'Playfair Display',serif;font-size:28px;line-height:1}
+.design-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.admin-design-item{border:1px solid var(--beige-dark);border-radius:6px;overflow:hidden}
+.admin-design-preview{height:110px;display:flex;align-items:center;justify-content:center;position:relative;font-size:46px}
+.btn-add{background:var(--maroon);color:#fff;border:none;padding:8px 18px;border-radius:2px;cursor:pointer;font-family:'Cormorant Garamond',serif;font-size:14px}
+.page-header{margin-bottom:1.75rem}
+.page-header h1{font-family:'Playfair Display',serif;font-size:30px;color:var(--text)}
+.page-header p{font-size:15px;color:var(--text-muted);font-weight:300;margin-top:3px}
+.page-divider{width:50px;height:2px;background:var(--gold);margin-top:.7rem}
+footer{background:var(--maroon-dark);color:rgba(255,255,255,.72);padding:3rem 1.5rem 1.5rem}
+.footer-grid{max-width:960px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:2.5rem;margin-bottom:2rem}
+.footer-logo{font-family:'Playfair Display',serif;font-size:21px;color:#fff;margin-bottom:.7rem}
+.footer-logo span{color:var(--gold)}
+.footer-brand p{font-size:13px;font-weight:300;line-height:1.8}
+.footer-info{font-size:13px;line-height:2;margin-top:.9rem;font-weight:300}
+.footer-col h4{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
+.footer-col ul{list-style:none}
+.footer-col li{font-size:13px;margin-bottom:7px;font-weight:300;cursor:pointer;transition:color .2s}
+.footer-col li:hover{color:var(--gold-light)}
+.footer-bottom{max-width:960px;margin:0 auto;border-top:1px solid rgba(255,255,255,.1);padding-top:1.1rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:9px}
+.footer-bottom p{font-size:12px;font-weight:300}
+.social-row{display:flex;gap:9px}
+.social-btn{width:34px;height:34px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:2px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:17px;transition:all .2s}
+.social-btn:hover{background:rgba(212,175,55,.15);border-color:rgba(212,175,55,.4)}
+.wa-float{position:fixed;bottom:22px;right:22px;z-index:300;width:52px;height:52px;background:#25d366;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;box-shadow:0 4px 16px rgba(37,211,102,.4);cursor:pointer;text-decoration:none;transition:transform .2s}
+.wa-float:hover{transform:scale(1.08)}
+.toast{position:fixed;bottom:86px;right:22px;background:var(--maroon-dark);color:#fff;padding:13px 18px;border-radius:4px;border-left:3px solid var(--gold);font-size:14px;box-shadow:0 8px 32px rgba(0,0,0,.25);transform:translateX(130%);transition:transform .3s ease;z-index:999;max-width:300px;line-height:1.5}
+.toast.show{transform:translateX(0)}
+@media(max-width:768px){.nav-links,.nav-right{display:none}.mob-toggle{display:block}.hero-inner,.shop-grid,.footer-grid{grid-template-columns:1fr}.hero h1{font-size:28px}.cat-grid,.designs-grid,.test-grid,.dash-cards,.design-grid3{grid-template-columns:1fr 1fr}.steps-grid{grid-template-columns:1fr 1fr}.meas-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.cat-grid,.designs-grid,.test-grid,.dash-cards,.design-grid3{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const {useState,useRef}=React;
+
+// DATA
+const CATS=[{id:"bridal",label:"Bridal Blouses",icon:"👑",count:48,desc:"Intricate designs for your special day"},{id:"aari",label:"Aari Work",icon:"🪡",count:64,desc:"Traditional hand embroidery art"},{id:"maggam",label:"Maggam Work",icon:"💎",count:39,desc:"Zardozi & kundan embellishments"},{id:"computer",label:"Computer Embroidery",icon:"🖥️",count:52,desc:"Precision digital patterns"},{id:"party",label:"Party Wear",icon:"✨",count:71,desc:"Glamorous evening designs"},{id:"designer",label:"Designer Collection",icon:"🎨",count:33,desc:"Curated luxury pieces"}];
+const DD=[{id:1,name:"Royal Bridal Maggam",cat:"bridal",price:3500,days:3,badge:"Trending",emoji:"👑",color:"#fff0f3",desc:"Exquisite Maggam work with zardozi and kundan stones.",available:true},{id:2,name:"Aari Peacock Design",cat:"aari",price:1800,days:2,badge:"New",emoji:"🦚",color:"#f0f4ff",desc:"Intricate peacock motif in Aari embroidery.",available:true},{id:3,name:"Computer Floral",cat:"computer",price:1200,days:2,badge:"",emoji:"🌸",color:"#f0fff4",desc:"Modern floral via computer embroidery.",available:true},{id:4,name:"Party Sequin Back",cat:"party",price:2200,days:3,badge:"Popular",emoji:"💫",color:"#fffbf0",desc:"Glamorous sequin back design.",available:true},{id:5,name:"Zardozi Bridal Set",cat:"bridal",price:5500,days:3,badge:"Premium",emoji:"💎",color:"#fff0f3",desc:"Heavy Zardozi with mirror & stones.",available:true},{id:6,name:"Kundan Collar Blouse",cat:"maggam",price:3200,days:2,badge:"New",emoji:"🌟",color:"#fdf0ff",desc:"Kundan stone collar design.",available:true},{id:7,name:"Designer Mirror Work",cat:"designer",price:4200,days:3,badge:"Exclusive",emoji:"🪞",color:"#f5f0ff",desc:"Handcrafted mirror work embroidery.",available:true},{id:8,name:"Aari Rose Border",cat:"aari",price:2100,days:2,badge:"",emoji:"🌹",color:"#f0f4ff",desc:"Delicate rose border Aari stitch.",available:true},{id:9,name:"Golden Thread Party",cat:"party",price:1900,days:2,badge:"Popular",emoji:"✨",color:"#fffbf0",desc:"Golden zari thread work.",available:true},{id:10,name:"Computer Geometric",cat:"computer",price:1400,days:2,badge:"",emoji:"🔷",color:"#f0fff4",desc:"Sharp geometric computer embroidery.",available:true},{id:11,name:"Bridal Kundan Collar",cat:"bridal",price:4800,days:3,badge:"Trending",emoji:"👸",color:"#fff0f3",desc:"Full collar Kundan bridal set.",available:true},{id:12,name:"Maggam Lotus Work",cat:"maggam",price:2800,days:3,badge:"",emoji:"🪷",color:"#fdf0ff",desc:"Traditional lotus Maggam motif.",available:false}];
+const STEPS=[{label:"Order Received",icon:"📋",date:"28 May 2025, 10:30 AM",sub:""},{label:"Measurement Confirmed",icon:"📏",date:"28 May 2025, 2:15 PM",sub:""},{label:"Work In Progress",icon:"🪡",date:"In Progress",sub:"Embroidery & stitching underway"},{label:"Ready for Pickup",icon:"📦",date:"Pending",sub:"Expected: 31 May 2025"},{label:"Delivered",icon:"🏠",date:"Pending",sub:""}];
+const ORDERS=[{id:"KD-2025-0892",customer:"Priya Sharma",phone:"+91 98765 43210",design:"Royal Bridal Maggam",status:"progress",amt:3500,advance:2300,date:"28 May",deliveryDate:"31 May"},{id:"KD-2025-0891",customer:"Kavitha Rajan",phone:"+91 98765 11111",design:"Aari Peacock Design",status:"ready",amt:1800,advance:1800,date:"27 May",deliveryDate:"30 May"},{id:"KD-2025-0890",customer:"Deepa S",phone:"+91 98765 22222",design:"Computer Floral",status:"pending",amt:1200,advance:600,date:"27 May",deliveryDate:"30 May"},{id:"KD-2025-0889",customer:"Anitha Kumar",phone:"+91 98765 33333",design:"Zardozi Bridal Set",status:"delivered",amt:5500,advance:5500,date:"24 May",deliveryDate:"27 May"},{id:"KD-2025-0888",customer:"Meena Devi",phone:"+91 98765 44444",design:"Party Sequin Back",status:"progress",amt:2200,advance:1100,date:"26 May",deliveryDate:"29 May"}];
+const SM={pending:{cls:"badge-pending",label:"Pending",icon:"⏳"},progress:{cls:"badge-progress",label:"In Progress",icon:"🪡"},ready:{cls:"badge-ready",label:"Ready",icon:"📦"},delivered:{cls:"badge-delivered",label:"Delivered",icon:"✅"}};
+
+function useToast(){const [msg,setMsg]=useState("");const [show,setShow]=useState(false);const t=useRef(null);const toast=(m)=>{setMsg(m);setShow(true);clearTimeout(t.current);t.current=setTimeout(()=>setShow(false),3200);};return{msg,show,toast};}
+
+function DesignModal({d,onClose,onBook,onWish}){
+  const [note,setNote]=useState("");
+  const dd=new Date();dd.setDate(dd.getDate()+d.days);
+  const ds=dd.toLocaleDateString("en-IN",{day:"numeric",month:"long",year:"numeric"});
+  const cat=CATS.find(c=>c.id===d.cat)?.label||"";
+  return(<div className="modal-overlay" onClick={onClose}><div className="modal" onClick={e=>e.stopPropagation()}>
+    <div className="modal-img" style={{background:d.color}}><span style={{fontSize:76}}>{d.emoji}</span></div>
+    <button className="modal-close" onClick={onClose}>✕</button>
+    <div className="modal-body">
+      <h2>{d.name}</h2>
+      <p style={{color:"var(--text-muted)",fontSize:14,fontWeight:300,lineHeight:1.7,marginBottom:"0.6rem"}}>{d.desc}</p>
+      <div style={{background:"#e0ffe8",border:"1px solid #a3d9b1",borderRadius:4,padding:"9px 13px",marginBottom:"1rem",display:"flex",alignItems:"center",gap:9}}>
+        <span style={{fontSize:20}}>⚡</span>
+        <div><div style={{fontSize:14,fontWeight:600,color:"#1a7a36"}}>Ready in {d.days} Day{d.days>1?"s":""}</div>
+        <div style={{fontSize:12,color:"#1a7a36"}}>Order today → Ready by <strong>{ds}</strong> · 🚚 Pan-India delivery</div></div>
+      </div>
+      <div className="modal-tags"><span className="tag">📂 {cat}</span><span className="tag">💰 ₹{d.price.toLocaleString()}+</span><span className="tag">⚡ {d.days} days</span><span className="tag">🚚 All India</span>{d.badge&&<span className="tag" style={{background:"var(--maroon)",color:"#fff"}}>{d.badge}</span>}</div>
+      <span className="modal-lbl">Upload Saree / Cloth Image (optional)</span>
+      <div className="upload-box"><div style={{fontSize:28}}>📷</div><span>Click to upload saree or cloth image</span></div>
+      <span className="modal-lbl">Special Instructions</span>
+      <textarea className="special-note" value={note} onChange={e=>setNote(e.target.value)} placeholder="e.g. Deep back neck, elbow sleeves..."/>
+      <div style={{background:"var(--beige)",borderRadius:4,padding:"10px 13px",marginTop:".9rem",fontSize:13,display:"flex",justifyContent:"space-between",flexWrap:"wrap",gap:7}}>
+        <span><span style={{color:"var(--text-muted)"}}>Total: </span><strong style={{fontSize:17,color:"var(--maroon)"}}>₹{d.price.toLocaleString()}</strong></span>
+        <span><span style={{color:"var(--text-muted)"}}>Advance (50%): </span><strong>₹{Math.round(d.price*.5).toLocaleString()}</strong></span>
+      </div>
+      <div className="modal-actions"><button className="btn-maroon" onClick={onBook}>🛒 Add to Cart</button><button className="btn-outlined" onClick={onWish}>♡ Wishlist</button></div>
+    </div>
+  </div></div>);
+}
+
+function Nav({page,setPage,cartCount,custAuth,adminAuth,onCustLogin,onCustLogout,onAdminLogout}){
+  const [open,setOpen]=useState(false);
+  const isAdmin=page==="admin"&&adminAuth;
+  const go=(p)=>{setPage(p);setOpen(false);};
+  const links=[{id:"home",l:"Home"},{id:"gallery",l:"Gallery"},{id:"tracker",l:"Track Order"},{id:"measure",l:"Measurements"},{id:"appt",l:"Appointment"}];
+  return(<>
+    <nav className="nav">
+      <div className="nav-logo" onClick={()=>go("home")}>Krishna<span>Designs</span></div>
+      {!isAdmin&&<ul className="nav-links">{links.map(l=><li key={l.id}><button className={"nav-link"+(page===l.id?" active":"")} onClick={()=>go(l.id)}>{l.l}</button></li>)}</ul>}
+      {isAdmin&&<div style={{fontSize:13,color:"var(--text-muted)",fontStyle:"italic",display:"flex",alignItems:"center",gap:7}}><span style={{width:7,height:7,background:"#25d366",borderRadius:"50%",display:"inline-block"}}/>Owner Panel</div>}
+      <div className="nav-right">
+        {!isAdmin&&<>
+          <button className={"nav-link"+(page==="cart"?" active":"")} onClick={()=>go("cart")} style={{position:"relative"}}>🛒{cartCount>0&&<span style={{position:"absolute",top:-6,right:-8,background:"var(--maroon)",color:"#fff",borderRadius:"50%",width:17,height:17,fontSize:10,display:"flex",alignItems:"center",justifyContent:"center"}}>{cartCount}</span>}</button>
+          {custAuth?<><button className="btn-ghost" onClick={()=>go("dashboard")}>👤 {custAuth.name.split(" ")[0]}</button><button className="btn-ghost" onClick={onCustLogout} style={{padding:"7px 10px"}}>↩</button></>:<button className="btn-ghost" onClick={onCustLogin}>Sign In</button>}
+          <button className="btn-solid" onClick={()=>go("admin")}>🔐 Owner</button>
+        </>}
+        {isAdmin&&<div style={{display:"flex",gap:7}}>
+          <button onClick={()=>go("home")} style={{background:"rgba(212,175,55,.12)",border:"1px solid rgba(212,175,55,.3)",color:"var(--gold-dark)",padding:"7px 14px",borderRadius:2,cursor:"pointer",fontFamily:"Cormorant Garamond,serif",fontSize:14}}>← Store</button>
+          <button className="btn-solid" onClick={onAdminLogout}>Sign Out</button>
+        </div>}
+      </div>
+      <button className="mob-toggle" onClick={()=>setOpen(o=>!o)}>{open?"✕":"☰"}</button>
+    </nav>
+    {open&&<div style={{background:"#fff",borderBottom:"1px solid var(--beige-dark)",padding:"1rem 1.5rem",display:"flex",flexDirection:"column",gap:2,boxShadow:"0 4px 16px rgba(0,0,0,.08)"}}>
+      {!isAdmin&&<>{links.map(l=><button key={l.id} className={"nav-link"+(page===l.id?" active":"")} style={{textAlign:"left",padding:"9px 0",fontSize:16}} onClick={()=>go(l.id)}>{l.l}</button>)}<button className="nav-link" style={{textAlign:"left",padding:"9px 0"}} onClick={()=>go("cart")}>🛒 Cart ({cartCount})</button>{custAuth?<><button className="nav-link" style={{textAlign:"left",padding:"9px 0"}} onClick={()=>go("dashboard")}>👤 My Account</button><button className="nav-link" style={{textAlign:"left",padding:"9px 0",color:"var(--text-muted)"}} onClick={onCustLogout}>Sign Out</button></>:<button className="nav-link" style={{textAlign:"left",padding:"9px 0"}} onClick={onCustLogin}>Sign In / Register</button>}<div style={{height:1,background:"var(--beige-dark)",margin:"7px 0"}}/><button className="nav-link" style={{textAlign:"left",padding:"9px 0",color:"var(--maroon)",fontWeight:600}} onClick={()=>go("admin")}>🔐 Owner Panel</button></>}
+      {isAdmin&&<><button className="nav-link" style={{textAlign:"left",padding:"9px 0"}} onClick={()=>go("home")}>← Back to Store</button><button className="nav-link" style={{textAlign:"left",padding:"9px 0",color:"#c00"}} onClick={onAdminLogout}>Sign Out</button></>}
+    </div>}
+  </>);
+}
+
+function Home({setPage,setFilter,addToCart,toast}){
+  const [sel,setSel]=useState(null);
+  const featured=DD.filter(d=>d.available).slice(0,6);
+  return(<>
+    <div className="hero"><div className="hero-inner">
+      <div>
+        <div className="hero-badge">⚡ Ready 2–3 Days · All India Delivery</div>
+        <h1>Krishna Designs — <em>Premium Blouses</em> from Eluru</h1>
+        <p className="hero-sub">Bridal blouses, Aari work, Maggam work & computer embroidery by <strong style={{color:"var(--gold)"}}>M Vara Lakshmi</strong>. Order today — wear in <strong style={{color:"var(--gold)"}}>2–3 days</strong>. 🚚 Delivered anywhere in India.</p>
+        <div className="hero-btns"><button className="btn-gold" onClick={()=>setPage("gallery")}>✨ Explore Designs</button><button className="btn-outline-w" onClick={()=>setPage("appt")}>Book Appointment</button></div>
+        <div className="hero-stats"><div className="stat-box"><div className="stat-num">2–3</div><div className="stat-lbl">Day Delivery</div></div><div className="stat-box"><div className="stat-num">2,400+</div><div className="stat-lbl">Orders Done</div></div><div className="stat-box"><div className="stat-num">4.9★</div><div className="stat-lbl">Rating</div></div></div>
+      </div>
+      <div className="hero-cards">{[{icon:"⚡",t:"2–3 Day Delivery",s:"Express crafting, fast delivery"},{icon:"🚚",t:"Pan-India Shipping",s:"Delivered anywhere in India"},{icon:"📏",t:"Custom Fit",s:"Perfect measurements every time"}].map(c=><div className="hero-card" key={c.t}><div className="hero-card-icon">{c.icon}</div><div><strong>{c.t}</strong><span>{c.s}</span></div></div>)}</div>
+    </div></div>
+    <div className="banner"><div className="banner-inner">{[{icon:"⚡",t:"2-Day Computer Embroidery"},{icon:"🪡",t:"3-Day Bridal Blouses"},{icon:"🚚",t:"Free Shipping ₹2000+"},{icon:"💬",t:"WhatsApp Updates"}].map(b=><div key={b.t} className="banner-item"><span style={{fontSize:16}}>{b.icon}</span>{b.t}</div>)}</div></div>
+    <section className="section"><div className="section-inner">
+      <div className="section-head"><div className="section-tag">Process</div><h2>How It Works</h2><p>Design to delivery in 2–3 days</p><div className="gold-line"/></div>
+      <div className="steps-grid">{[{icon:"🎨",n:"1",t:"Choose Design",d:"Browse & pick your blouse"},{icon:"📏",n:"2",t:"Share Measurements",d:"Online or visit Eluru shop"},{icon:"🪡",n:"3",t:"We Craft It",d:"M Vara Lakshmi crafts your blouse"},{icon:"📦",n:"4",t:"Delivered 2–3 Days",d:"Pickup or pan-India delivery"}].map(s=><div key={s.n} className="step-box"><div className="step-icon">{s.icon}</div><div className="step-num">STEP {s.n}</div><h3>{s.t}</h3><p>{s.d}</p></div>)}</div>
+      <div style={{textAlign:"center",marginTop:"2rem"}}><button className="btn-gold" onClick={()=>setPage("gallery")}>Start Your Order →</button></div>
+    </div></section>
+    <section className="section bg-beige"><div className="section-inner">
+      <div className="section-head"><div className="section-tag">Collections</div><h2>Explore Collections</h2><p>All designs 2–3 days · All India delivery</p><div className="gold-line"/></div>
+      <div className="cat-grid">{CATS.map(c=><div className="cat-card" key={c.id} onClick={()=>{setFilter(c.id);setPage("gallery");}}><div className="cat-icon">{c.icon}</div><h3>{c.label}</h3><p>{c.desc}</p><div className="cat-count">{c.count} designs</div></div>)}</div>
+    </div></section>
+    <section className="section"><div className="section-inner">
+      <div className="section-head"><div className="section-tag">Featured</div><h2>Popular Designs</h2><p>By M Vara Lakshmi · 2–3 days · Pan-India delivery</p><div className="gold-line"/></div>
+      <div className="designs-grid">{featured.map(d=><div className="design-card" key={d.id}><div className="design-img" style={{background:d.color}}>{d.badge&&<div className="design-badge">{d.badge}</div>}<div className="day-badge">⚡{d.days}d</div><button className="wish-btn" onClick={()=>toast(`Added "${d.name}" to wishlist ♥`)}>♡</button>{d.emoji}</div><div className="design-body"><h3>{d.name}</h3><p>{CATS.find(c=>c.id===d.cat)?.label}</p><div className="design-meta"><div className="design-price">₹{d.price.toLocaleString()} <small>onwards</small></div><span className="day-pill" style={{background:d.days<=2?"#e0ffe8":"#fff8e1",color:d.days<=2?"#1a7a36":"#b45309"}}>⚡{d.days}d</span></div><button className="btn-view" onClick={()=>setSel(d)}>View Details →</button></div></div>)}</div>
+      <div style={{textAlign:"center",marginTop:"2rem"}}><button className="btn-gold" onClick={()=>setPage("gallery")}>View All →</button></div>
+    </div></section>
+    <section className="section bg-beige"><div className="section-inner">
+      <div className="section-head"><div className="section-tag">Reviews</div><h2>Loved Across India</h2><div className="gold-line"/></div>
+      <div className="test-grid">{[{name:"Priya Lakshmi",stars:5,text:"Got blouse in 2 days from Eluru! Stunning Maggam work. Delivered to Hyderabad perfectly."},{name:"Kavitha Rajan",stars:5,text:"Ordered from Bangalore — delivered in 3 days! Perfect measurements, beautiful embroidery."},{name:"Deepa Sundaram",stars:5,text:"Aari peacock design was breathtaking. Pan-India delivery was smooth. Highly recommended!"}].map(t=><div className="test-card" key={t.name}><div className="test-stars">{"★".repeat(t.stars)}</div><blockquote>"{t.text}"</blockquote><div className="test-name">— {t.name}</div></div>)}</div>
+    </div></section>
+    <section className="section"><div className="section-inner">
+      <div className="section-head"><div className="section-tag">Visit Us</div><h2>Krishna Designs — Eluru</h2><p>Walk in or order online for pan-India delivery</p><div className="gold-line"/></div>
+      <div className="shop-grid">
+        <div style={{background:"var(--beige)",borderRadius:6,padding:"1.75rem",border:"1px solid var(--beige-dark)"}}>
+          <h3 style={{fontFamily:"Playfair Display,serif",fontSize:19,marginBottom:"1rem"}}>📍 Our Shop</h3>
+          <div style={{lineHeight:2.1,fontSize:15,color:"var(--text-mid)"}}><div><strong>Krishna Designs</strong></div><div>Perugu Chettu Center</div><div>Door No. 3A-16-8/2, Eluru-534001</div><div>West Godavari, Andhra Pradesh</div><div style={{marginTop:10}}><strong>Owner:</strong> M Vara Lakshmi</div><div>📞 <a href="tel:+918519859829" style={{color:"var(--maroon)",textDecoration:"none"}}>+91 85198 59829</a></div><div style={{fontSize:13}}>📧 balakrishnavishnusaiyadav@gmail.com</div></div>
+        </div>
+        <div style={{display:"flex",flexDirection:"column",gap:14}}>
+          <div style={{background:"var(--beige)",borderRadius:6,padding:"1.4rem",border:"1px solid var(--beige-dark)"}}>
+            <h3 style={{fontFamily:"Playfair Display,serif",fontSize:17,marginBottom:".9rem"}}>🕐 Hours</h3>
+            {[["Mon – Sat","10 AM – 7 PM"],["Sunday","Closed"]].map(([d,t])=><div key={d} style={{display:"flex",justifyContent:"space-between",fontSize:14,padding:"5px 0",borderBottom:"1px solid var(--beige-dark)"}}><span style={{color:"var(--text-mid)"}}>{d}</span><span style={{fontWeight:500,color:t==="Closed"?"#c00":"var(--maroon)"}}>{t}</span></div>)}
+          </div>
+          <div style={{background:"linear-gradient(135deg,var(--maroon-dark),var(--maroon))",borderRadius:6,padding:"1.4rem",color:"#fff"}}>
+            <h3 style={{fontFamily:"Playfair Display,serif",fontSize:17,marginBottom:".7rem",color:"var(--gold)"}}>🚚 Delivery</h3>
+            <ul style={{listStyle:"none",fontSize:13,lineHeight:2,color:"rgba(255,255,255,.85)"}}><li>✅ All over India</li><li>✅ Free shipping ₹2,000+</li><li>✅ 2–3 day crafting</li><li>✅ WhatsApp tracking</li></ul>
+          </div>
+        </div>
+      </div>
+    </div></section>
+    {sel&&<DesignModal d={sel} onClose={()=>setSel(null)} onBook={()=>{addToCart(sel);setSel(null);toast(`"${sel.name}" added to cart! 🛒`);}} onWish={()=>toast(`Added "${sel.name}" to wishlist ♥`)}/>}
+  </>);
+}
+
+function Gallery({addToCart,toast,filter,setFilter}){
+  const [sel,setSel]=useState(null);const [search,setSearch]=useState("");const [sort,setSort]=useState("default");
+  let vis=DD.filter(d=>d.available&&(!filter||d.cat===filter)&&(!search||d.name.toLowerCase().includes(search.toLowerCase())));
+  if(sort==="price-asc")vis=[...vis].sort((a,b)=>a.price-b.price);
+  if(sort==="price-desc")vis=[...vis].sort((a,b)=>b.price-a.price);
+  if(sort==="days-asc")vis=[...vis].sort((a,b)=>a.days-b.days);
+  return(<section className="section"><div className="section-inner">
+    <div className="section-head"><div className="section-tag">Gallery</div><h2>Browse All Designs</h2><p>Every design ready in <strong>2–3 days</strong> · Delivered across India</p><div className="gold-line"/></div>
+    <div style={{display:"flex",gap:10,marginBottom:"1.25rem",flexWrap:"wrap",justifyContent:"center"}}>
+      <input type="text" value={search} onChange={e=>setSearch(e.target.value)} placeholder="🔍 Search designs..." style={{flex:1,minWidth:200,maxWidth:340,padding:"9px 15px",border:"1px solid var(--beige-dark)",borderRadius:100,fontFamily:"Cormorant Garamond,serif",fontSize:15,background:"var(--beige)",outline:"none",color:"var(--text)"}}/>
+      <select value={sort} onChange={e=>setSort(e.target.value)} style={{padding:"9px 14px",border:"1px solid var(--beige-dark)",borderRadius:100,fontFamily:"Cormorant Garamond,serif",fontSize:14,background:"var(--beige)",outline:"none",cursor:"pointer"}}>
+        <option value="default">Sort: Default</option><option value="price-asc">Price: Low → High</option><option value="price-desc">Price: High → Low</option><option value="days-asc">Fastest First</option>
+      </select>
+    </div>
+    <div className="gallery-filters"><button className={"filter-btn"+(!filter?" active":"")} onClick={()=>setFilter(null)}>All</button>{CATS.map(c=><button key={c.id} className={"filter-btn"+(filter===c.id?" active":"")} onClick={()=>setFilter(c.id)}>{c.icon} {c.label}</button>)}</div>
+    <p style={{textAlign:"center",fontSize:13,color:"var(--text-muted)",marginBottom:"1.25rem"}}>Showing {vis.length} design{vis.length!==1?"s":""}</p>
+    {vis.length>0?<div className="designs-grid">{vis.map(d=><div className="design-card" key={d.id}><div className="design-img" style={{background:d.color}}>{d.badge&&<div className="design-badge">{d.badge}</div>}<div className="day-badge">⚡{d.days}d</div><button className="wish-btn" onClick={()=>toast(`Added "${d.name}" to wishlist ♥`)}>♡</button>{d.emoji}</div><div className="design-body"><h3>{d.name}</h3><p>{CATS.find(c=>c.id===d.cat)?.label}</p><div className="design-meta"><div className="design-price">₹{d.price.toLocaleString()} <small>onwards</small></div><span className="day-pill" style={{background:d.days<=2?"#e0ffe8":"#fff8e1",color:d.days<=2?"#1a7a36":"#b45309"}}>⚡{d.days}d</span></div><button className="btn-view" onClick={()=>setSel(d)}>View Details →</button></div></div>)}</div>
+    :<div style={{textAlign:"center",padding:"4rem 2rem"}}><div style={{fontSize:52,marginBottom:"1rem"}}>🔍</div><p style={{fontSize:17,color:"var(--text-muted)"}}>No designs found.</p><button style={{marginTop:"1rem",background:"none",border:"1px solid var(--maroon)",color:"var(--maroon)",padding:"8px 18px",borderRadius:2,cursor:"pointer",fontFamily:"Cormorant Garamond,serif",fontSize:14}} onClick={()=>{setFilter(null);setSearch("");}}>Clear filters</button></div>}
+    {sel&&<DesignModal d={sel} onClose={()=>setSel(null)} onBook={()=>{addToCart(sel);setSel(null);toast(`"${sel.name}" added to cart! 🛒`);}} onWish={()=>toast(`Added "${sel.name}" to wishlist ♥`)}/>}
+  </div></section>);
+}
+
+function Tracker(){
+  const [oid,setOid]=useState("");const [tracked,setTracked]=useState(false);const [notFound,setNotFound]=useState(false);
+  const track=()=>{const id=oid.trim().toUpperCase();if(!id)return;if(id==="KD-2025-0892"){setTracked(true);setNotFound(false);}else{setTracked(false);setNotFound(true);}};
+  return(<section className="section"><div className="section-inner narrow">
+    <div className="page-header"><h1>Track Your Order</h1><p>Enter your Order ID to see live status</p><div className="page-divider"/></div>
+    <div style={{background:"rgba(212,175,55,.1)",border:"1px solid rgba(212,175,55,.3)",borderRadius:4,padding:"9px 14px",marginBottom:"1.1rem",fontSize:13,color:"var(--text-mid)"}}>💡 Demo: Try <strong>KD-2025-0892</strong></div>
+    <div className="card">
+      <div className="track-row"><input className="track-input" value={oid} onChange={e=>setOid(e.target.value)} placeholder="e.g. KD-2025-0892" onKeyDown={e=>e.key==="Enter"&&track()}/><button className="btn-track" onClick={track}>Track</button></div>
+      {notFound&&<div style={{textAlign:"center",padding:"1.75rem",background:"var(--beige)",borderRadius:4}}><div style={{fontSize:36,marginBottom:7}}>❓</div><p style={{fontSize:15,color:"var(--text-muted)"}}>Order not found. Please check your Order ID.</p></div>}
+      {tracked&&<>
+        <div className="order-meta">{[{l:"Order ID",v:"KD-2025-0892"},{l:"Design",v:"Bridal Maggam"},{l:"Placed",v:"28 May"},{l:"Delivery By",v:"31 May"},{l:"Balance",v:"₹1,200",red:true}].map(m=><div className="meta-item" key={m.l}><div className="mlbl">{m.l}</div><div className={"mval"+(m.red?" red":"")}>{m.v}</div></div>)}</div>
+        <div style={{background:"#e0ffe8",border:"1px solid #a3d9b1",borderRadius:4,padding:"9px 13px",marginBottom:"1.5rem",display:"flex",alignItems:"center",gap:9,fontSize:13}}><span style={{fontSize:18}}>⚡</span><strong style={{color:"#1a7a36"}}>Express 3-Day Delivery — Ready by 31 May 2025</strong></div>
+        <div className="timeline">{STEPS.map((s,i)=>{const cls=i<2?"done":i===2?"active":"";return(<div className={"tl-row "+cls} key={s.label}><div className="tl-dot">{i<2?"✓":s.icon}</div><div><div className="tl-lbl">{s.label}</div>{s.sub&&<div className="tl-sub">{s.sub}</div>}<div className="tl-date">{s.date}</div></div></div>);})}</div>
+        <div style={{marginTop:"1.25rem",padding:"9px 13px",background:"var(--beige)",borderRadius:4,display:"flex",alignItems:"center",gap:10,flexWrap:"wrap"}}>
+          <span style={{fontSize:13,color:"var(--text-muted)",flex:1}}>📱 Get WhatsApp updates</span>
+          <a href="https://wa.me/918519859829" target="_blank" style={{background:"#25d366",color:"#fff",padding:"7px 14px",borderRadius:2,fontFamily:"Cormorant Garamond,serif",fontSize:14,textDecoration:"none"}}>💬 WhatsApp Us</a>
+        </div>
+      </>}
+    </div>
+  </div></section>);
+}
+
+function Measurements({toast}){
+  const [tab,setTab]=useState(0);const [vals,setVals]=useState({});
+  const fields=["Bust","Waist","Shoulder Width","Arm Round","Sleeve Length","Front Neck Depth","Back Neck Depth","Height"];
+  return(<section className="section"><div className="section-inner narrow">
+    <div className="page-header"><h1>My Measurements</h1><p>Save profiles for perfect fit</p><div className="page-divider"/></div>
+    <div className="meas-tabs">{["Bridal","Casual","+ New"].map((t,i)=><button key={t} className={"meas-tab"+(tab===i?" active":"")} onClick={()=>setTab(i)}>{t}</button>)}</div>
+    <div className="card">
+      <p style={{fontSize:13,color:"var(--text-muted)",marginBottom:"1.1rem",fontWeight:300}}>All measurements in <strong>inches</strong>.</p>
+      <div className="meas-grid">{fields.map(f=><div className="meas-field" key={f}><label className="meas-label">{f}</label><input className="meas-input" type="number" placeholder="inches" value={vals[tab+"_"+f]||""} onChange={e=>setVals(v=>({...v,[tab+"_"+f]:e.target.value}))}/></div>)}</div>
+      <div className="hint-box">💡 Visit our Eluru shop for free professional measurements with any order.</div>
+      <div className="upload-box" onClick={()=>toast("Image upload — use the React version for this feature!")}><div style={{fontSize:28}}>👗</div><span>Upload existing blouse photo to auto-estimate</span></div>
+      <button className="btn-save" onClick={()=>toast(["Bridal","Casual","New"][tab]+" measurements saved! ✓")}>Save Profile</button>
+    </div>
+  </div></section>);
+}
+
+function Appointment({toast}){
+  const [purpose,setPurpose]=useState("Measurement");const [date,setDate]=useState(15);const [time,setTime]=useState("10:00 AM");const [name,setName]=useState("");const [phone,setPhone]=useState("");
+  return(<section className="section"><div className="section-inner narrow">
+    <div className="page-header"><h1>Book an Appointment</h1><p>Visit our Eluru shop or get a callback</p><div className="page-divider"/></div>
+    <div className="card">
+      <span className="appt-lbl">Purpose</span>
+      <div className="pill-group">{["Measurement","Consultation","Design Discussion","Trial Fitting"].map(p=><button key={p} className={"pill"+(purpose===p?" active":"")} onClick={()=>setPurpose(p)}>{p}</button>)}</div>
+      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:11,marginBottom:"1.25rem"}}>
+        <div className="meas-field"><label className="meas-label">Your Name</label><input className="meas-input" type="text" placeholder="Priya Sharma" value={name} onChange={e=>setName(e.target.value)}/></div>
+        <div className="meas-field"><label className="meas-label">Phone</label><input className="meas-input" type="tel" placeholder="+91 85198 59829" value={phone} onChange={e=>setPhone(e.target.value)}/></div>
+      </div>
+      <span className="appt-lbl">Select Date — June 2025</span>
+      <div className="date-grid">{["Su","Mo","Tu","We","Th","Fr","Sa"].map(d=><div className="date-head" key={d}>{d}</div>)}{Array.from({length:30},(_,i)=>i+1).map(d=><div key={d} className={"date-cell"+(d<5?" past":d===date?" sel":"")} onClick={()=>d>=5&&setDate(d)}>{d}</div>)}</div>
+      <span className="appt-lbl">Time Slot</span>
+      <div className="pill-group">{["10:00 AM","11:30 AM","2:00 PM","3:30 PM","5:00 PM"].map(t=><button key={t} className={"pill"+(time===t?" active":"")} onClick={()=>setTime(t)}>{t}</button>)}<button className="pill disabled" disabled>6:30 PM — Full</button></div>
+      <div className="appt-summary">📋 <strong>Summary:</strong> {purpose} on <strong>June {date}, 2025</strong> at <strong>{time}</strong>{name&&<> with <strong>{name}</strong></>}</div>
+      <button className="btn-save" onClick={()=>{if(!name.trim()||!phone.trim()){toast("Please enter name & phone");return;}toast(`✅ Confirmed! ${purpose} on June ${date} at ${time}. We'll call you!`);}}>Confirm Appointment</button>
+      <p style={{textAlign:"center",fontSize:12,color:"var(--text-muted)",marginTop:".9rem"}}>📍 Perugu Chettu Center, Eluru · 📞 +91 85198 59829</p>
+    </div>
+  </div></section>);
+}
+
+function Cart({cart,removeItem,clearCart,total,toast,setPage}){
+  const [coupon,setCoupon]=useState("");const [applied,setApplied]=useState(null);
+  const CUPS={KRISHNA10:{pct:10,label:"10% off"},FIRST15:{pct:15,label:"15% off first order"}};
+  const disc=applied?Math.round(total*applied.pct/100):0;const fin=total-disc;const adv=Math.round(fin*.5);
+  if(cart.length===0)return(<section className="section"><div className="section-inner narrow"><div className="card" style={{textAlign:"center",padding:"3.5rem"}}><div style={{fontSize:60,marginBottom:"1rem"}}>🛒</div><p style={{fontSize:17,color:"var(--text-muted)"}}>Your cart is empty</p><button className="btn-gold" style={{marginTop:"1.25rem"}} onClick={()=>setPage("gallery")}>Browse Designs</button></div></div></section>);
+  return(<section className="section"><div className="section-inner narrow">
+    <div className="page-header"><h1>My Cart</h1><p>{cart.length} item{cart.length!==1?"s":""}</p><div className="page-divider"/></div>
+    <div className="card">
+      {cart.map(item=><div className="cart-item" key={item.cartId}><div className="cart-item-img">{item.emoji}</div><div><div className="cart-item-name">{item.name}</div><div style={{fontSize:12,color:"var(--text-muted)"}}>{item.days} days delivery · 🚚 Pan-India</div><div className="cart-item-price">₹{item.price.toLocaleString()}</div></div><button className="cart-item-remove" onClick={()=>removeItem(item.cartId)}>✕</button></div>)}
+      <div className="coupon-row"><input className="coupon-input" placeholder="Coupon — try KRISHNA10 or FIRST15" value={coupon} onChange={e=>{setCoupon(e.target.value.toUpperCase());setApplied(null);}}/><button className="btn-apply" onClick={()=>{const c=coupon.trim().toUpperCase();if(CUPS[c]){setApplied({...CUPS[c],code:c});toast(`✅ "${c}" applied — ${CUPS[c].label}`);}else toast("❌ Invalid coupon");}}>Apply</button></div>
+      {applied&&<p style={{fontSize:13,color:"green",marginBottom:"1rem"}}>✅ {applied.label}</p>}
+      <div className="price-breakdown">
+        <div className="price-row"><span>Subtotal</span><span>₹{total.toLocaleString()}</span></div>
+        {disc>0&&<div className="price-row disc"><span>Discount ({applied.code})</span><span>−₹{disc.toLocaleString()}</span></div>}
+        <div className="price-row"><span>Advance (50%)</span><span>₹{adv.toLocaleString()}</span></div>
+        <div className="price-row"><span>Balance on Pickup</span><span>₹{(fin-adv).toLocaleString()}</span></div>
+        <div className="price-row total"><span>Total</span><span>₹{fin.toLocaleString()}</span></div>
+      </div>
+      <div style={{marginTop:"1.25rem"}}>
+        <p style={{fontSize:11,letterSpacing:"1px",textTransform:"uppercase",color:"var(--text-muted)",marginBottom:9}}>Delivery Details</p>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>{[["Name","text","Full name"],["Phone","tel","+91 XXXXX XXXXX"],["Address","text","Street, City"],["Pincode","number","534001"]].map(([l,t,ph])=><div className="meas-field" key={l}><label className="meas-label">{l}</label><input className="meas-input" type={t} placeholder={ph}/></div>)}</div>
+      </div>
+      <div style={{display:"flex",gap:9,marginTop:"1.25rem"}}>
+        <button className="btn-maroon" style={{flex:2}} onClick={()=>{toast("✅ Order placed! Redirecting to payment...");clearCart();setPage("tracker");}}>💳 Pay ₹{adv.toLocaleString()} Advance (Razorpay)</button>
+        <button className="btn-outlined" style={{flex:1}} onClick={()=>toast("Cash — we'll confirm on WhatsApp ✓")}>💵 Cash</button>
+      </div>
+      <p style={{textAlign:"center",fontSize:11,color:"var(--text-muted)",marginTop:".7rem"}}>🔒 Secure · UPI · Cards · Net Banking</p>
+    </div>
+  </div></section>);
+}
+
+function Dashboard({custAuth,setPage,toast,onLogout}){
+  const [tab,setTab]=useState("orders");
+  const fn=custAuth?.name?.split(" ")[0]||"Customer";
+  return(<section className="section"><div className="section-inner">
+    <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:"1.75rem",flexWrap:"wrap",gap:11}}>
+      <div style={{display:"flex",alignItems:"center",gap:"1.1rem"}}>
+        <div style={{width:56,height:56,background:"var(--maroon)",borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:22,color:"#fff",flexShrink:0}}>{fn.charAt(0).toUpperCase()}</div>
+        <div><h1 style={{fontFamily:"Playfair Display,serif",fontSize:24}}>Welcome, {fn} 👋</h1><p style={{fontSize:14,color:"var(--text-muted)",fontWeight:300}}>{custAuth?.phone?"+91 "+custAuth.phone:"Customer Account"}</p></div>
+      </div>
+      <button onClick={onLogout} style={{background:"none",border:"1px solid var(--beige-dark)",color:"var(--text-muted)",padding:"7px 16px",borderRadius:2,cursor:"pointer",fontFamily:"Cormorant Garamond,serif",fontSize:14}}>Sign Out ↩</button>
+    </div>
+    <div className="meas-tabs">{["orders","profile","appointments","payments","wishlist"].map(t=><button key={t} className={"meas-tab"+(tab===t?" active":"")} onClick={()=>setTab(t)}>{t.charAt(0).toUpperCase()+t.slice(1)}</button>)}</div>
+    {tab==="orders"&&<div className="card"><div className="table-wrap"><table className="data-table"><thead><tr><th>Order ID</th><th>Design</th><th>Date</th><th>Delivery</th><th>Amount</th><th>Status</th><th></th></tr></thead><tbody>{ORDERS.slice(0,4).map(o=><tr key={o.id}><td style={{fontFamily:"monospace",fontSize:11,color:"var(--maroon)"}}>{o.id}</td><td style={{fontSize:13}}>{o.design}</td><td style={{fontSize:12}}>{o.date}</td><td style={{fontWeight:500,color:"var(--maroon)",fontSize:12}}>{o.deliveryDate}</td><td>₹{o.amt.toLocaleString()}</td><td><span className={"status-badge "+SM[o.status].cls}>{SM[o.status].label}</span></td><td><button onClick={()=>setPage("tracker")} style={{background:"none",border:"none",color:"var(--maroon)",cursor:"pointer",fontFamily:"Cormorant Garamond,serif",fontSize:13}}>Track →</button></td></tr>)}</tbody></table></div></div>}
+    {tab==="profile"&&<div className="card"><div className="meas-grid">{[["Full Name","text",custAuth?.name||""],["Phone","tel",custAuth?.phone||""],["Email","email",""],["City","text",""]].map(([l,t,v])=><div className="meas-field" key={l}><label className="meas-label">{l}</label><input className="meas-input" type={t} defaultValue={v} placeholder={"Enter "+l.toLowerCase()}/></div>)}</div><button className="btn-save" onClick={()=>toast("Profile updated ✓")}>Save Changes</button></div>}
+    {tab==="appointments"&&<div className="card"><div style={{padding:"1rem 1.1rem",background:"var(--beige)",borderRadius:4,borderLeft:"3px solid var(--gold)",marginBottom:"1rem"}}><div style={{fontSize:11,letterSpacing:"1px",textTransform:"uppercase",color:"var(--text-muted)"}}>Upcoming</div><div style={{fontFamily:"Playfair Display,serif",fontSize:17,marginTop:3}}>Measurement — June 5 at 11:30 AM</div></div><button className="btn-save" style={{marginTop:"1.25rem"}} onClick={()=>setPage("appt")}>+ Book New Appointment</button></div>}
+    {tab==="payments"&&<div className="card"><div className="table-wrap"><table className="data-table"><thead><tr><th>Order</th><th>Total</th><th>Paid</th><th>Balance</th></tr></thead><tbody>{ORDERS.slice(0,4).map(o=>{const b=o.amt-o.advance;return(<tr key={o.id}><td style={{fontFamily:"monospace",fontSize:11}}>{o.id}</td><td>₹{o.amt.toLocaleString()}</td><td style={{color:"green"}}>₹{o.advance.toLocaleString()}</td><td style={{color:b>0?"var(--maroon)":"var(--text-muted)"}}>{b>0?"₹"+b.toLocaleString():"—"}</td></tr>);})}</tbody></table></div></div>}
+    {tab==="wishlist"&&<div className="card">{[{name:"Zardozi Bridal Set",emoji:"💎",price:5500},{name:"Designer Mirror Work",emoji:"🪞",price:4200}].map(item=><div className="cart-item" key={item.name}><div className="cart-item-img">{item.emoji}</div><div><div className="cart-item-name">{item.name}</div><div className="cart-item-price">₹{item.price.toLocaleString()}</div></div><button style={{marginLeft:"auto",background:"var(--maroon)",color:"#fff",border:"none",padding:"6px 13px",borderRadius:2,cursor:"pointer",fontFamily:"Cormorant Garamond,serif",fontSize:13}} onClick={()=>setPage("gallery")}>View</button></div>)}</div>}
+  </div></section>);
+}
+
+function CustomerLoginModal({onLogin,onClose}){
+  const [mode,setMode]=useState("login");const [phone,setPhone]=useState("");const [name,setName]=useState("");const [otp,setOtp]=useState(["","","","","",""]);const [loading,setLoading]=useState(false);const [err,setErr]=useState("");
+  const refs=Array.from({length:6},()=>null);
+  const sendOtp=()=>{if(phone.trim().length<10){setErr("Enter valid 10-digit number");return;}setErr("");setLoading(true);setTimeout(()=>{setLoading(false);setMode("otp");},900);};
+  const verifyOtp=()=>{const code=otp.join("");if(code.length<6){setErr("Enter all 6 digits");return;}setLoading(true);setTimeout(()=>{setLoading(false);onLogin({name:name||"Customer",phone});},700);};
+  return(<div style={{position:"fixed",inset:0,background:"rgba(26,10,15,.65)",zIndex:400,display:"flex",alignItems:"center",justifyContent:"center",padding:"1.25rem"}}>
+    <div style={{position:"relative",width:"100%",maxWidth:400}}>
+      <button onClick={onClose} style={{position:"absolute",top:-38,right:0,background:"none",border:"none",color:"#fff",fontSize:22,cursor:"pointer"}}>✕</button>
+      <div className="login-box">
+        <div className="login-logo">Krishna<span>Designs</span></div>
+        <p style={{textAlign:"center",fontSize:13,color:"var(--text-muted)",marginTop:4,marginBottom:"1.4rem"}}>{mode==="otp"?"Enter OTP sent to your phone":mode==="register"?"Create your account":"Sign in to your account"}</p>
+        {mode!=="otp"&&<div style={{display:"flex",borderBottom:"2px solid var(--beige-dark)",marginBottom:"1.25rem"}}>{[["login","Sign In"],["register","Register"]].map(([m,l])=><button key={m} onClick={()=>{setMode(m);setErr("");}} style={{flex:1,padding:"9px",background:"none",border:"none",fontFamily:"Cormorant Garamond,serif",fontSize:15,cursor:"pointer",color:mode===m?"var(--maroon)":"var(--text-muted)",borderBottom:mode===m?"2px solid var(--maroon)":"2px solid transparent",marginBottom:-2,fontWeight:mode===m?600:400}}>{l}</button>)}</div>}
+        {err&&<div style={{background:"#fff0f0",border:"1px solid #ffd0d0",borderRadius:4,padding:"9px 13px",fontSize:13,color:"#c00",marginBottom:"1rem"}}>⚠️ {err}</div>}
+        {mode==="otp"&&<>
+          <div style={{textAlign:"center",marginBottom:"1.1rem"}}><div style={{fontSize:13,color:"var(--text-muted)"}}>OTP sent to <strong>+91 {phone}</strong></div><div style={{fontSize:11,color:"var(--gold-dark)",marginTop:3}}>Demo: enter any 6 digits</div></div>
+          <div className="otp-inputs">{otp.map((d,i)=><input key={i} ref={el=>refs[i]=el} type="text" inputMode="numeric" maxLength={1} value={d} onChange={e=>{const digs=[...otp];digs[i]=e.target.value.replace(/\D/g,"").slice(-1);setOtp(digs);if(e.target.value&&i<5)refs[i+1]?.focus();}} onKeyDown={e=>e.key==="Backspace"&&!d&&i>0&&refs[i-1]?.focus()} className="otp-inp"/>)}</div>
+          <button className="btn-save" onClick={verifyOtp}>{loading?"Verifying...":"✅ Verify OTP"}</button>
+          <div style={{textAlign:"center",marginTop:".9rem"}}><button onClick={()=>{setMode("login");setOtp(["","","","","",""]);}} style={{background:"none",border:"none",color:"var(--maroon)",cursor:"pointer",fontFamily:"Cormorant Garamond,serif",fontSize:13}}>← Change Number</button></div>
+        </>}
+        {mode!=="otp"&&<>
+          {mode==="register"&&<div style={{marginBottom:"1rem"}}><label style={{fontSize:11,letterSpacing:"1px",textTransform:"uppercase",color:"var(--text-muted)",display:"block",marginBottom:5}}>Full Name</label><input type="text" value={name} onChange={e=>setName(e.target.value)} placeholder="Priya Sharma" style={{width:"100%",padding:"10px 13px",border:"1px solid var(--beige-dark)",borderRadius:4,fontFamily:"Cormorant Garamond,serif",fontSize:16,color:"var(--text)",background:"var(--beige)",outline:"none"}}/></div>}
+          <div style={{marginBottom:"1rem"}}><label style={{fontSize:11,letterSpacing:"1px",textTransform:"uppercase",color:"var(--text-muted)",display:"block",marginBottom:5}}>Mobile Number</label>
+            <div style={{display:"flex",border:"1px solid var(--beige-dark)",borderRadius:4,overflow:"hidden",background:"var(--beige)"}}><div style={{padding:"10px 11px",fontSize:16,color:"var(--text-mid)",borderRight:"1px solid var(--beige-dark)",background:"#ede8da",flexShrink:0}}>🇮🇳 +91</div><input type="tel" value={phone} onChange={e=>setPhone(e.target.value.replace(/\D/g,"").slice(0,10))} onKeyDown={e=>e.key==="Enter"&&sendOtp()} placeholder="98765 43210" style={{flex:1,padding:"10px 13px",border:"none",fontFamily:"Cormorant Garamond,serif",fontSize:16,color:"var(--text)",background:"var(--beige)",outline:"none"}}/></div>
+          </div>
+          <button className="btn-save" style={{marginBottom:"1rem"}} onClick={sendOtp}>{loading?"Sending OTP...":"📱 Send OTP"}</button>
+          <div style={{display:"flex",alignItems:"center",gap:10,margin:".9rem 0"}}><div style={{flex:1,height:1,background:"var(--beige-dark)"}}/><span style={{fontSize:12,color:"var(--text-muted)"}}>or</span><div style={{flex:1,height:1,background:"var(--beige-dark)"}}/></div>
+          <button onClick={()=>{setLoading(true);setTimeout(()=>{setLoading(false);onLogin({name:"Google User",phone:""});},900);}} style={{width:"100%",background:"#fff",border:"1px solid var(--beige-dark)",color:"var(--text)",padding:"10px",borderRadius:4,cursor:"pointer",fontFamily:"Cormorant Garamond,serif",fontSize:16,display:"flex",alignItems:"center",justifyContent:"center",gap:9}}>🔵 Continue with Google</button>
+          <div style={{textAlign:"center",marginTop:"1rem"}}><button onClick={onClose} style={{background:"none",border:"none",color:"var(--text-muted)",cursor:"pointer",fontFamily:"Cormorant Garamond,serif",fontSize:14,textDecoration:"underline"}}>Browse without signing in →</button></div>
+        </>}
+      </div>
+    </div>
+  </div>);
+}
+
+function AdminLogin({onLogin}){
+  const [email,setEmail]=useState("");const [pw,setPw]=useState("");const [show,setShow]=useState(false);const [err,setErr]=useState("");const [loading,setLoading]=useState(false);
+  const login=()=>{setErr("");if(!email||!pw){setErr("Enter email and password");return;}setLoading(true);setTimeout(()=>{if(email.trim().toLowerCase()==="admin@krishnadesigns.in"&&pw==="krishna@2025"){onLogin();}else setErr("Invalid credentials. Please try again.");setLoading(false);},800);};
+  return(<div style={{minHeight:"100vh",background:"linear-gradient(135deg,#5c0016 0%,#800020 50%,#6b0019 100%)",display:"flex",alignItems:"center",justifyContent:"center",padding:"2rem",position:"relative",overflow:"hidden"}}>
+    <div style={{position:"absolute",inset:0,pointerEvents:"none",backgroundImage:"repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(212,175,55,.04) 40px,rgba(212,175,55,.04) 41px)"}}/>
+    <div style={{background:"#fff",borderRadius:8,padding:"2.25rem",width:"100%",maxWidth:420,position:"relative",zIndex:1,boxShadow:"0 24px 64px rgba(0,0,0,.35)"}}>
+      <div style={{textAlign:"center",marginBottom:"1.75rem"}}>
+        <div style={{fontSize:44,marginBottom:".4rem"}}>🏪</div>
+        <div style={{fontFamily:"Playfair Display,serif",fontSize:24,fontWeight:700,color:"var(--maroon)"}}>Krishna<span style={{color:"var(--gold)"}}>Designs</span></div>
+        <div style={{fontSize:12,color:"var(--text-muted)",marginTop:4}}>by M Vara Lakshmi · Eluru, A.P.</div>
+        <div style={{fontSize:11,color:"var(--text-muted)",letterSpacing:"1.5px",textTransform:"uppercase",marginTop:7}}>Owner / Admin Portal</div>
+        <div style={{width:40,height:2,background:"var(--gold)",margin:"9px auto 0"}}/>
+      </div>
+      {err&&<div style={{background:"#fff0f0",border:"1px solid #ffd0d0",borderRadius:4,padding:"9px 13px",fontSize:13,color:"#c00",marginBottom:"1.1rem"}}>⚠️ {err}</div>}
+      <div style={{background:"rgba(212,175,55,.08)",border:"1px solid rgba(212,175,55,.3)",borderRadius:4,padding:"9px 13px",fontSize:12,color:"var(--text-mid)",marginBottom:"1.25rem"}}>
+        <div style={{fontWeight:600,marginBottom:3,color:"var(--gold-dark)"}}>🔑 Login Credentials</div>
+        <div>Email: <strong>admin@krishnadesigns.in</strong></div>
+        <div>Password: <strong>krishna@2025</strong></div>
+      </div>
+      <div style={{marginBottom:"1rem"}}><label style={{fontSize:11,letterSpacing:"1px",textTransform:"uppercase",color:"var(--text-muted)",display:"block",marginBottom:5}}>Email</label>
+        <input type="email" value={email} onChange={e=>setEmail(e.target.value)} onKeyDown={e=>e.key==="Enter"&&login()} placeholder="admin@krishnadesigns.in" style={{width:"100%",padding:"10px 13px",border:"1px solid var(--beige-dark)",borderRadius:4,fontFamily:"Cormorant Garamond,serif",fontSize:16,color:"var(--text)",background:"var(--beige)",outline:"none"}}/>
+      </div>
+      <div style={{marginBottom:"1.4rem"}}><label style={{fontSize:11,letterSpacing:"1px",textTransform:"uppercase",color:"var(--text-muted)",display:"block",marginBottom:5}}>Password</label>
+        <div style={{position:"relative"}}>
+          <input type={show?"text":"password"} value={pw} onChange={e=>setPw(e.target.value)} onKeyDown={e=>e.key==="Enter"&&login()} placeholder="Enter password" style={{width:"100%",padding:"10px 42px 10px 13px",border:"1px solid var(--beige-dark)",borderRadius:4,fontFamily:"Cormorant Garamond,serif",fontSize:16,color:"var(--text)",background:"var(--beige)",outline:"none"}}/>
+          <button onClick={()=>setShow(s=>!s)} style={{position:"absolute",right:11,top:"50%",transform:"translateY(-50%)",background:"none",border:"none",cursor:"pointer",fontSize:17,color:"var(--text-muted)"}}>{show?"🙈":"👁️"}</button>
+        </div>
+      </div>
+      <button onClick={login} disabled={loading} style={{width:"100%",background:loading?"var(--text-muted)":"var(--maroon)",color:"#fff",border:"none",padding:"12px",borderRadius:4,cursor:loading?"not-allowed":"pointer",fontFamily:"Cormorant Garamond,serif",fontSize:17,display:"flex",alignItems:"center",justifyContent:"center",gap:9}}>
+        {loading?<><span style={{display:"inline-block",width:15,height:15,border:"2px solid rgba(255,255,255,.4)",borderTopColor:"#fff",borderRadius:"50%",animation:"spin .7s linear infinite"}}/>Signing in...</>:<>🔐 Sign In to Owner Panel</>}
+      </button>
+    </div>
+    <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
+  </div>);
+}
+
+function Admin({toast,onLogout}){
+  const [tab,setTab]=useState("dashboard");
+  const [designs,setDesigns]=useState(DD.map(d=>({...d,stock:Math.floor(Math.random()*12)+1})));
+  const [orders,setOrders]=useState(ORDERS);
+  const [settings,setSettings]=useState({shopName:"Krishna Designs",phone:"+91 85198 59829",address:"Perugu Chettu Center, Eluru-1, W. Godavari, A.P.",advancePct:50});
+  const tabs=[{id:"dashboard",l:"📊 Dashboard"},{id:"orders",l:"🛍️ Orders"},{id:"designs",l:"🎨 Designs"},{id:"stock",l:"📦 Stock"},{id:"customers",l:"👥 Customers"},{id:"appointments",l:"📅 Appointments"},{id:"payments",l:"💰 Payments"},{id:"settings",l:"⚙️ Settings"}];
+  const totalRev=orders.reduce((s,o)=>s+o.amt,0);const totalRec=orders.reduce((s,o)=>s+o.advance,0);
+  const pend=orders.filter(o=>o.status==="pending").length;const inPr=orders.filter(o=>o.status==="progress").length;const rdy=orders.filter(o=>o.status==="ready").length;
+  const lowStk=designs.filter(d=>d.stock<=3&&d.available).length;
+  const updStatus=(id,status)=>{setOrders(os=>os.map(x=>x.id===id?{...x,status}:x));const o=orders.find(x=>x.id===id);toast(`✅ ${id} → "${SM[status].label}" · WhatsApp sent to ${o?.customer}`);};
+  const updStock=(id,delta)=>setDesigns(ds=>ds.map(x=>x.id===id?{...x,stock:Math.max(0,x.stock+delta)}:x));
+  const toggleAvail=(id)=>setDesigns(ds=>ds.map(x=>x.id===id?{...x,available:!x.available}:x));
+  return(<div className="admin-wrap">
+    <div className="admin-topbar">
+      <div style={{display:"flex",alignItems:"center",gap:11}}><span style={{fontSize:20}}>🏪</span><div><div style={{fontFamily:"Playfair Display,serif",fontSize:17,color:"var(--gold)"}}>Krishna Designs — Owner Panel</div><div style={{fontSize:11,color:"rgba(255,255,255,.5)"}}>M Vara Lakshmi · Eluru, A.P.</div></div></div>
+      <div style={{display:"flex",gap:9,flexWrap:"wrap"}}>
+        {lowStk>0&&<div style={{background:"#b45309",color:"#fff",padding:"4px 11px",borderRadius:100,fontSize:12}}>⚠️ {lowStk} low stock</div>}
+        {rdy>0&&<div style={{background:"#1a7a36",color:"#fff",padding:"4px 11px",borderRadius:100,fontSize:12}}>📦 {rdy} ready</div>}
+        <button onClick={()=>toast("📲 WhatsApp broadcast sent!")} style={{background:"#25d366",color:"#fff",border:"none",padding:"5px 14px",borderRadius:4,cursor:"pointer",fontFamily:"Cormorant Garamond,serif",fontSize:13}}>💬 Broadcast</button>
+        <button onClick={onLogout} style={{background:"rgba(255,255,255,.12)",border:"1px solid rgba(255,255,255,.25)",color:"#fff",padding:"5px 14px",borderRadius:4,cursor:"pointer",fontFamily:"Cormorant Garamond,serif",fontSize:13}}>Sign Out</button>
+      </div>
+    </div>
+    <div style={{padding:"1.25rem 1.5rem",maxWidth:1200,margin:"0 auto"}}>
+      <div className="admin-tabs">{tabs.map(t=><button key={t.id} className={"admin-tab"+(tab===t.id?" active":"")} onClick={()=>setTab(t.id)}>{t.l}</button>)}</div>
+
+      {tab==="dashboard"&&<>
+        <div className="dash-cards">{[{l:"Total Orders",v:orders.length,s:"All time",c:"var(--gold)",i:"🛍️"},{l:"Pending",v:pend,s:"Need action",c:"#b45309",i:"⏳"},{l:"In Progress",v:inPr,s:"Being crafted",c:"#1d5fa4",i:"🪡"},{l:"Revenue",v:"₹"+(totalRev/1000).toFixed(1)+"K",s:"₹"+((totalRev-totalRec)/1000).toFixed(1)+"K pending",c:"var(--maroon)",i:"💰"}].map(s=><div key={s.l} className="dash-card" style={{borderTop:"3px solid "+s.c}}><div style={{display:"flex",justifyContent:"space-between"}}><div><div className="dlbl">{s.l}</div><div className="dval" style={{color:s.c}}>{s.v}</div><small style={{fontSize:12,color:"var(--text-muted)"}}>{s.s}</small></div><div style={{fontSize:26,opacity:.4}}>{s.i}</div></div></div>)}</div>
+        <div style={{display:"grid",gridTemplateColumns:"1.5fr 1fr",gap:18}}>
+          <div style={{background:"#fff",borderRadius:6,padding:"1.4rem",boxShadow:"0 1px 4px rgba(0,0,0,.04)"}}><h3 style={{fontFamily:"Playfair Display,serif",fontSize:19,marginBottom:"1.1rem"}}>🔔 Recent Activity</h3>{[{m:"New order — Royal Bridal Maggam placed",t:"2 min ago"},{m:"KD-2025-0891 marked Ready for Pickup",t:"1 hr ago"},{m:"Payment ₹2,300 received for KD-2025-0892",t:"3 hr ago"},{m:"New appointment: June 5 at 11:30 AM",t:"5 hr ago"},{m:"Kundan Collar Blouse added to catalogue",t:"Yesterday"}].map((a,i)=><div key={i} style={{display:"flex",justifyContent:"space-between",gap:11,padding:"9px 0",borderBottom:"1px solid var(--beige)",fontSize:13}}><span style={{color:"var(--text-mid)"}}>• {a.m}</span><span style={{fontSize:11,color:"var(--text-muted)",flexShrink:0}}>{a.t}</span></div>)}</div>
+          <div style={{background:"#fff",borderRadius:6,padding:"1.4rem",boxShadow:"0 1px 4px rgba(0,0,0,.04)"}}>
+            <h3 style={{fontFamily:"Playfair Display,serif",fontSize:19}}>📈 Revenue</h3><p style={{fontSize:12,color:"var(--text-muted)"}}>Last 6 months</p>
+            {(()=>{const data=[{l:"Jan",v:42},{l:"Feb",v:58},{l:"Mar",v:53},{l:"Apr",v:71},{l:"May",v:64},{l:"Jun",v:88}];return(<div style={{display:"flex",alignItems:"flex-end",gap:7,height:80,marginTop:"1rem"}}>{data.map(d=><div key={d.l} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:3}}><div style={{fontSize:9,color:"var(--maroon)",fontWeight:600}}>{d.v}K</div><div style={{width:"100%",background:"var(--maroon)",opacity:.5+(d.v/88)*.5,height:Math.round((d.v/88)*65)+"px",borderRadius:"3px 3px 0 0",minHeight:3}}/><span style={{fontSize:9,color:"var(--text-muted)"}}>{d.l}</span></div>)}</div>)})()}
+            <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:7,marginTop:"1rem"}}>{[{l:"This Month",v:"₹88K",c:"var(--maroon)"},{l:"Last Month",v:"₹64K",c:"var(--text)"},{l:"Growth",v:"+37%",c:"green"}].map(s=><div key={s.l} style={{textAlign:"center",background:"var(--beige)",borderRadius:4,padding:".5rem"}}><div style={{fontFamily:"Playfair Display,serif",fontSize:18,color:s.c}}>{s.v}</div><div style={{fontSize:10,color:"var(--text-muted)"}}>{s.l}</div></div>)}</div>
+          </div>
+        </div>
+        <div style={{background:"#fff",borderRadius:6,padding:"1.4rem",marginTop:18,boxShadow:"0 1px 4px rgba(0,0,0,.04)"}}>
+          <h3 style={{fontFamily:"Playfair Display,serif",fontSize:18,marginBottom:"1rem"}}>⚡ Quick Actions</h3>
+          <div style={{display:"flex",gap:9,flexWrap:"wrap"}}>{[{l:"➕ Add New Design",a:()=>setTab("designs")},{l:"📦 Stock Alerts",a:()=>setTab("stock")},{l:"🛍️ Pending Orders",a:()=>setTab("orders")},{l:"📅 Appointments",a:()=>setTab("appointments")},{l:"💰 Collect Payment",a:()=>setTab("payments")},{l:"💬 WhatsApp All",a:()=>toast("📲 WhatsApp broadcast sent!")}].map(a=><button key={a.l} onClick={a.a} style={{background:"var(--beige)",border:"1px solid var(--beige-dark)",color:"var(--text-mid)",padding:"8px 16px",borderRadius:100,cursor:"pointer",fontFamily:"Cormorant Garamond,serif",fontSize:14}}>{a.l}</button>)}</div>
+        </div>
+      </>}
+
+      {tab==="orders"&&<div style={{background:"#fff",borderRadius:6,padding:"1.4rem",boxShadow:"0 1px 4px rgba(0,0,0,.04)"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"1.1rem",flexWrap:"wrap",gap:9}}><h3 style={{fontFamily:"Playfair Display,serif",fontSize:20}}>🛍️ All Orders ({orders.length})</h3><button className="btn-add" onClick={()=>toast("New order form — coming soon!")}>+ New Order</button></div>
+        <div className="table-wrap"><table className="data-table"><thead><tr><th>Order ID</th><th>Customer</th><th>Phone</th><th>Design</th><th>Date</th><th>Delivery</th><th>Total</th><th>Balance</th><th>Status</th><th>Actions</th></tr></thead><tbody>{orders.map(o=>{const b=o.amt-o.advance;return(<tr key={o.id}><td style={{fontFamily:"monospace",fontSize:11,color:"var(--maroon)"}}>{o.id}</td><td style={{fontWeight:500,fontSize:13}}>{o.customer}</td><td style={{fontSize:12}}>{o.phone}</td><td style={{fontSize:13}}>{o.design}</td><td style={{fontSize:12}}>{o.date}</td><td style={{fontSize:12,fontWeight:500,color:"var(--maroon)"}}>{o.deliveryDate}</td><td>₹{o.amt.toLocaleString()}</td><td style={{color:b>0?"var(--maroon)":"green",fontWeight:500}}>{b>0?"₹"+b.toLocaleString():"✓ Paid"}</td><td><select className="status-select" value={o.status} onChange={e=>updStatus(o.id,e.target.value)}>{Object.entries(SM).map(([k,v])=><option key={k} value={k}>{v.icon} {v.label}</option>)}</select></td><td><div style={{display:"flex",gap:3}}><button className="icon-btn" onClick={()=>toast("💬 WhatsApp sent to "+o.customer)}>💬</button><button className="icon-btn" onClick={()=>toast("🖨️ Invoice ready!")}>🖨️</button>{b>0&&<button className="icon-btn" onClick={()=>toast("🔔 Reminder sent to "+o.customer)}>🔔</button>}</div></td></tr>);})}</tbody></table></div>
+      </div>}
+
+      {tab==="designs"&&<div style={{background:"#fff",borderRadius:6,padding:"1.4rem",boxShadow:"0 1px 4px rgba(0,0,0,.04)"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"1.25rem",flexWrap:"wrap",gap:9}}>
+          <div><h3 style={{fontFamily:"Playfair Display,serif",fontSize:20}}>🎨 Design Catalogue</h3><p style={{fontSize:13,color:"var(--text-muted)"}}>{designs.filter(d=>d.available).length} visible · {designs.filter(d=>!d.available).length} hidden</p></div>
+          <button className="btn-add" onClick={()=>toast("Add design form — coming in next update!")}>➕ Add Design</button>
+        </div>
+        <div className="design-grid3">{designs.map(d=><div key={d.id} className="admin-design-item" style={{opacity:d.available?1:.75,border:"1px solid "+(d.available?"var(--beige-dark)":"#ffd0d0")}}>
+          <div className="admin-design-preview" style={{background:d.color}}>{d.emoji}
+            {!d.available&&<div style={{position:"absolute",inset:0,background:"rgba(200,0,0,.08)",display:"flex",alignItems:"center",justifyContent:"center"}}><span style={{background:"#c00",color:"#fff",fontSize:9,padding:"2px 7px",borderRadius:2,letterSpacing:1}}>HIDDEN</span></div>}
+            {d.stock<=3&&d.available&&<div style={{position:"absolute",top:7,left:7,background:"#b45309",color:"#fff",fontSize:9,padding:"2px 6px",borderRadius:2}}>LOW STOCK</div>}
+            <div style={{position:"absolute",bottom:7,right:7,background:"rgba(0,0,0,.5)",color:"#fff",fontSize:10,padding:"2px 7px",borderRadius:100}}>📷 Add Photos</div>
+          </div>
+          <div style={{padding:".75rem"}}>
+            <div style={{fontFamily:"Playfair Display,serif",fontSize:13,marginBottom:2}}>{d.name}</div>
+            <div style={{fontSize:11,color:"var(--text-muted)",marginBottom:7}}>₹{d.price.toLocaleString()} · {d.days}d · Stock: <strong style={{color:d.stock===0?"#c00":d.stock<=3?"#b45309":"green"}}>{d.stock}</strong></div>
+            <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:7}}>
+              <button onClick={()=>toggleAvail(d.id)} style={{background:d.available?"#e0ffe8":"#ffe0e0",border:"none",borderRadius:100,padding:"2px 9px",fontSize:10,cursor:"pointer",color:d.available?"#1a7a36":"#c00"}}>{d.available?"✅ Visible":"❌ Hidden"}</button>
+            </div>
+            <div style={{display:"flex",gap:5}}>
+              <button onClick={()=>toast("Edit: "+d.name+" — full form in React version")} style={{flex:1,background:"var(--beige)",border:"1px solid var(--beige-dark)",borderRadius:2,padding:"5px",cursor:"pointer",fontSize:12,fontFamily:"Cormorant Garamond,serif"}}>✏️ Edit</button>
+              <button onClick={()=>toast("📷 Photo upload for: "+d.name)} style={{flex:1,background:"rgba(212,175,55,.1)",border:"1px solid rgba(212,175,55,.3)",borderRadius:2,padding:"5px",cursor:"pointer",fontSize:12,fontFamily:"Cormorant Garamond,serif",color:"var(--gold-dark)"}}>📷 Photos</button>
+            </div>
+          </div>
+        </div>)}</div>
+      </div>}
+
+      {tab==="stock"&&<div style={{background:"#fff",borderRadius:6,padding:"1.4rem",boxShadow:"0 1px 4px rgba(0,0,0,.04)"}}>
+        <h3 style={{fontFamily:"Playfair Display,serif",fontSize:20,marginBottom:"1.25rem"}}>📦 Stock Management</h3>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:11,marginBottom:"1.25rem"}}>{[{l:"Total Designs",v:designs.length,c:"var(--text)"},{l:"Low Stock (≤3)",v:designs.filter(d=>d.stock<=3&&d.stock>0).length,c:"#b45309"},{l:"Out of Stock",v:designs.filter(d=>d.stock===0).length,c:"#c00"}].map(s=><div key={s.l} style={{background:"var(--beige)",borderRadius:4,padding:".9rem",textAlign:"center"}}><div style={{fontFamily:"Playfair Display,serif",fontSize:26,color:s.c}}>{s.v}</div><div style={{fontSize:11,color:"var(--text-muted)",marginTop:3}}>{s.l}</div></div>)}</div>
+        <div className="table-wrap"><table className="data-table"><thead><tr><th>Design</th><th>Category</th><th>Price</th><th>Days</th><th>Stock</th><th>Status</th><th>Adjust</th></tr></thead><tbody>{designs.map(d=><tr key={d.id}><td><div style={{display:"flex",alignItems:"center",gap:7}}><span style={{fontSize:18}}>{d.emoji}</span><span style={{fontFamily:"Playfair Display,serif",fontSize:13}}>{d.name}</span></div></td><td style={{fontSize:12}}>{CATS.find(c=>c.id===d.cat)?.label}</td><td>₹{d.price.toLocaleString()}</td><td>{d.days}d</td><td><span style={{fontFamily:"Playfair Display,serif",fontSize:18,color:d.stock===0?"#c00":d.stock<=3?"#b45309":"green"}}>{d.stock}</span></td><td>{d.stock===0?<span className="status-badge badge-pending">Out of Stock</span>:d.stock<=3?<span className="status-badge" style={{background:"#fff3cd",color:"#856404"}}>Low Stock</span>:<span className="status-badge badge-ready">In Stock</span>}</td><td><div style={{display:"flex",alignItems:"center",gap:5}}><button onClick={()=>updStock(d.id,-1)} style={{width:26,height:26,border:"1px solid var(--beige-dark)",borderRadius:4,cursor:"pointer",background:"#fff0f0",fontSize:14,display:"flex",alignItems:"center",justifyContent:"center"}}>−</button><button onClick={()=>updStock(d.id,5)} style={{padding:"3px 9px",border:"1px solid var(--beige-dark)",borderRadius:4,cursor:"pointer",background:"#e0ffe8",fontSize:12,fontFamily:"Cormorant Garamond,serif"}}>+5</button><button onClick={()=>updStock(d.id,10)} style={{padding:"3px 9px",border:"1px solid var(--beige-dark)",borderRadius:4,cursor:"pointer",background:"#e0ffe8",fontSize:12,fontFamily:"Cormorant Garamond,serif"}}>+10</button></div></td></tr>)}</tbody></table></div>
+      </div>}
+
+      {tab==="customers"&&<div style={{background:"#fff",borderRadius:6,padding:"1.4rem",boxShadow:"0 1px 4px rgba(0,0,0,.04)"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"1.1rem",flexWrap:"wrap",gap:9}}><h3 style={{fontFamily:"Playfair Display,serif",fontSize:20}}>👥 Customers</h3><input type="text" placeholder="🔍 Search..." style={{padding:"7px 14px",border:"1px solid var(--beige-dark)",borderRadius:100,fontFamily:"Cormorant Garamond,serif",fontSize:14,background:"var(--beige)",outline:"none",minWidth:200}}/></div>
+        <div className="table-wrap"><table className="data-table"><thead><tr><th>Name</th><th>Phone</th><th>City</th><th>Orders</th><th>Last Order</th><th>Actions</th></tr></thead><tbody>{[{name:"Priya Sharma",phone:"+91 98765 43210",city:"Hyderabad",orders:3,last:"28 May"},{name:"Kavitha Rajan",phone:"+91 98765 11111",city:"Bangalore",orders:1,last:"27 May"},{name:"Deepa S",phone:"+91 98765 22222",city:"Chennai",orders:2,last:"27 May"},{name:"Anitha Kumar",phone:"+91 98765 33333",city:"Eluru",orders:5,last:"24 May"},{name:"Meena Devi",phone:"+91 98765 44444",city:"Vijayawada",orders:1,last:"26 May"}].map(c=><tr key={c.name}><td style={{fontWeight:500}}>{c.name}</td><td style={{fontSize:12}}>{c.phone}</td><td>{c.city}</td><td><span style={{fontFamily:"Playfair Display,serif",fontSize:17,color:"var(--maroon)"}}>{c.orders}</span></td><td style={{fontSize:12}}>{c.last}</td><td><div style={{display:"flex",gap:3}}><button className="icon-btn" onClick={()=>toast("📋 Orders: "+c.name)}>📋</button><button className="icon-btn" onClick={()=>toast("💬 WhatsApp: "+c.name)}>💬</button><button className="icon-btn" onClick={()=>toast("📏 Measurements: "+c.name)}>📏</button></div></td></tr>)}</tbody></table></div>
+      </div>}
+
+      {tab==="appointments"&&<div style={{background:"#fff",borderRadius:6,padding:"1.4rem",boxShadow:"0 1px 4px rgba(0,0,0,.04)"}}>
+        <h3 style={{fontFamily:"Playfair Display,serif",fontSize:20,marginBottom:"1.1rem"}}>📅 Appointments</h3>
+        <div className="table-wrap"><table className="data-table"><thead><tr><th>Customer</th><th>Purpose</th><th>Date</th><th>Time</th><th>Phone</th><th>Status</th><th>Actions</th></tr></thead><tbody>{[{name:"Priya Sharma",purpose:"Measurement",date:"5 Jun",time:"11:30 AM",phone:"+91 98765 43210",status:"pending"},{name:"Kavitha Rajan",purpose:"Design Discussion",date:"6 Jun",time:"2:00 PM",phone:"+91 98765 11111",status:"confirmed"},{name:"Deepa S",purpose:"Trial Fitting",date:"7 Jun",time:"10:00 AM",phone:"+91 98765 22222",status:"pending"}].map((a,i)=><tr key={i}><td style={{fontWeight:500}}>{a.name}</td><td>{a.purpose}</td><td>{a.date}</td><td>{a.time}</td><td style={{fontSize:12}}>{a.phone}</td><td><span className={"status-badge "+(a.status==="confirmed"?"badge-ready":"badge-pending")}>{a.status==="confirmed"?"✅ Confirmed":"⏳ Pending"}</span></td><td><div style={{display:"flex",gap:3}}><button className="icon-btn" style={{color:"green"}} onClick={()=>toast("✅ Confirmed: "+a.name)}>✅</button><button className="icon-btn" style={{color:"#c00"}} onClick={()=>toast("❌ Cancelled: "+a.name)}>❌</button><button className="icon-btn" onClick={()=>toast("💬 WhatsApp: "+a.name)}>💬</button></div></td></tr>)}</tbody></table></div>
+      </div>}
+
+      {tab==="payments"&&<div style={{background:"#fff",borderRadius:6,padding:"1.4rem",boxShadow:"0 1px 4px rgba(0,0,0,.04)"}}>
+        <h3 style={{fontFamily:"Playfair Display,serif",fontSize:20,marginBottom:"1.1rem"}}>💰 Payment Tracker</h3>
+        <div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:11,marginBottom:"1.25rem"}}>{[{l:"Total Billed",v:"₹"+orders.reduce((s,o)=>s+o.amt,0).toLocaleString(),c:"var(--text)"},{l:"Amount Received",v:"₹"+orders.reduce((s,o)=>s+o.advance,0).toLocaleString(),c:"green"},{l:"Pending Balance",v:"₹"+orders.reduce((s,o)=>s+(o.amt-o.advance),0).toLocaleString(),c:"var(--maroon)"}].map(s=><div key={s.l} style={{background:"var(--beige)",borderRadius:4,padding:".9rem",textAlign:"center"}}><div style={{fontFamily:"Playfair Display,serif",fontSize:24,color:s.c}}>{s.v}</div><div style={{fontSize:11,color:"var(--text-muted)",marginTop:3}}>{s.l}</div></div>)}</div>
+        <div className="table-wrap"><table className="data-table"><thead><tr><th>Order ID</th><th>Customer</th><th>Total</th><th>Paid</th><th>Balance</th><th>Actions</th></tr></thead><tbody>{orders.map(o=>{const b=o.amt-o.advance;return(<tr key={o.id}><td style={{fontFamily:"monospace",fontSize:11,color:"var(--maroon)"}}>{o.id}</td><td style={{fontWeight:500,fontSize:13}}>{o.customer}</td><td>₹{o.amt.toLocaleString()}</td><td style={{color:"green",fontWeight:500}}>₹{o.advance.toLocaleString()}</td><td style={{color:b>0?"var(--maroon)":"var(--text-muted)",fontWeight:500}}>{b>0?"₹"+b.toLocaleString():"✓ Cleared"}</td><td><div style={{display:"flex",gap:3}}><button className="icon-btn" onClick={()=>toast("📄 Invoice: "+o.id)}>📄</button>{b>0&&<><button className="icon-btn" onClick={()=>toast("🔔 Reminder: "+o.customer)}>🔔</button><button className="icon-btn" style={{color:"green"}} onClick={()=>{setOrders(os=>os.map(x=>x.id===o.id?{...x,advance:x.amt}:x));toast("✅ Full payment recorded: "+o.id);}}>✅</button></>}</div></td></tr>);})}</tbody></table></div>
+      </div>}
+
+      {tab==="settings"&&<div style={{background:"#fff",borderRadius:6,padding:"1.4rem",boxShadow:"0 1px 4px rgba(0,0,0,.04)"}}>
+        <h3 style={{fontFamily:"Playfair Display,serif",fontSize:20,marginBottom:"1.4rem"}}>⚙️ Shop Settings</h3>
+        <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12}}>
+          {[["Shop Name","text","shopName"],["Owner Phone","tel","phone"],["Shop Address","text","address"],["Advance %","number","advancePct"]].map(([l,t,k])=><div className="meas-field" key={k}><label className="meas-label">{l}</label><input className="meas-input" type={t} value={settings[k]} onChange={e=>setSettings(s=>({...s,[k]:e.target.value}))}/></div>)}
+          <div className="meas-field" style={{gridColumn:"1/-1"}}><label className="meas-label">WhatsApp Message Template</label><textarea className="special-note" style={{minHeight:60}} defaultValue="Dear {name}, your blouse is ready! Please collect or we'll ship within 24 hrs."/></div>
+        </div>
+        <button className="btn-save" style={{marginTop:"1.1rem"}} onClick={()=>toast("✅ Settings saved!")}>💾 Save Settings</button>
+        <div style={{marginTop:"1.5rem",padding:"1rem 1.25rem",background:"var(--beige)",borderRadius:4,borderLeft:"3px solid var(--gold)"}}>
+          <strong style={{fontSize:14,display:"block",marginBottom:5}}>🌐 To change Admin Password</strong>
+          <p style={{fontSize:13,color:"var(--text-muted)"}}>Open <code>krishna_designs.html</code> in a text editor → Search for <code>krishna@2025</code> → Replace with your new password → Save.</p>
+        </div>
+      </div>}
+    </div>
+  </div>);
+}
+
+function Footer({setPage,toast}){
+  return(<footer>
+    <div className="footer-grid">
+      <div><div className="footer-logo">Krishna<span>Designs</span></div><p>Premium blouse designing and embroidery atelier. Aari work, Maggam work & computer embroidery — crafted with love in Eluru, A.P.</p><div className="footer-info"><div>📍 Perugu Chettu Center, Door No. 3A-16-8/2</div><div>&nbsp;&nbsp;&nbsp;Eluru-534001, West Godavari, A.P.</div><div>👩‍💼 M Vara Lakshmi (Owner)</div><div>📞 +91 85198 59829</div><div>📧 balakrishnavishnusaiyadav@gmail.com</div><div>🕐 Mon–Sat: 10 AM – 7 PM</div><div>🚚 Delivery all over India</div></div></div>
+      <div className="footer-col"><h4>Services</h4><ul>{["Bridal Blouses","Aari Work","Maggam Work","Computer Embroidery","Saree Falls & Kuchu","Blouse Alterations"].map(s=><li key={s}>{s}</li>)}</ul></div>
+      <div className="footer-col"><h4>Quick Links</h4><ul><li onClick={()=>setPage("gallery")}>Design Gallery</li><li onClick={()=>setPage("tracker")}>Track My Order</li><li onClick={()=>setPage("appt")}>Book Appointment</li><li onClick={()=>setPage("measure")}>My Measurements</li></ul></div>
+    </div>
+    <div className="footer-bottom">
+      <p>© 2025 Krishna Designs · M Vara Lakshmi · Eluru, A.P. · Made in Eluru 🌸</p>
+      <div className="social-row">
+        <div className="social-btn" onClick={()=>window.open("https://wa.me/918519859829","_blank")}>💬</div>
+        <div className="social-btn" onClick={()=>toast("Opening Instagram...")}>📸</div>
+        <div className="social-btn" onClick={()=>toast("Opening Facebook...")}>👍</div>
+      </div>
+    </div>
+  </footer>);
+}
+
+function App(){
+  const [page,setPage]=useState("home");const [filter,setFilter]=useState(null);
+  const [adminAuth,setAdminAuth]=useState(false);const [custAuth,setCustAuth]=useState(null);
+  const [showCustLogin,setShowCustLogin]=useState(false);const [showAdminLogin,setShowAdminLogin]=useState(false);
+  const {msg,show,toast}=useToast();
+  const [cart,setCart]=useState([]);
+  const addItem=(item)=>setCart(c=>[...c,{...item,cartId:Date.now()+Math.random()}]);
+  const removeItem=(id)=>setCart(c=>c.filter(i=>i.cartId!==id));
+  const clearCart=()=>setCart([]);
+  const total=cart.reduce((s,i)=>s+i.price,0);const count=cart.length;
+  const goPage=(p)=>{
+    if(p==="admin"){if(!adminAuth){setShowAdminLogin(true);return;}}
+    if(p==="dashboard"&&!custAuth){setShowCustLogin(true);return;}
+    setPage(p);window.scrollTo({top:0,behavior:"smooth"});
+  };
+  const handleAdminLogin=()=>{setAdminAuth(true);setShowAdminLogin(false);setPage("admin");toast("✅ Welcome back, M Vara Lakshmi!");};
+  const handleAdminLogout=()=>{setAdminAuth(false);setPage("home");toast("Logged out of Admin Panel");};
+  const handleCustLogin=(user)=>{setCustAuth(user);setShowCustLogin(false);toast("Welcome, "+user.name+"! 👋");};
+  const handleCustLogout=()=>{setCustAuth(null);setPage("home");toast("Logged out successfully");};
+
+  if(showAdminLogin)return(<><AdminLogin onLogin={handleAdminLogin}/><button onClick={()=>setShowAdminLogin(false)} style={{position:"fixed",top:16,left:16,zIndex:999,background:"rgba(255,255,255,.15)",border:"1px solid rgba(255,255,255,.3)",color:"#fff",padding:"7px 15px",borderRadius:4,cursor:"pointer",fontFamily:"Cormorant Garamond,serif",fontSize:14}}>← Back to Store</button></>);
+
+  return(<div>
+    <Nav page={page} setPage={goPage} cartCount={count} custAuth={custAuth} adminAuth={adminAuth} onCustLogin={()=>setShowCustLogin(true)} onCustLogout={handleCustLogout} onAdminLogout={handleAdminLogout}/>
+    {showCustLogin&&<CustomerLoginModal onLogin={handleCustLogin} onClose={()=>setShowCustLogin(false)}/>}
+    <main>
+      {page==="home"&&<Home setPage={goPage} setFilter={setFilter} addToCart={addItem} toast={toast}/>}
+      {page==="gallery"&&<Gallery addToCart={addItem} toast={toast} filter={filter} setFilter={setFilter}/>}
+      {page==="tracker"&&<Tracker/>}
+      {page==="measure"&&<Measurements toast={toast}/>}
+      {page==="appt"&&<Appointment toast={toast}/>}
+      {page==="cart"&&<Cart cart={cart} removeItem={removeItem} clearCart={clearCart} total={total} toast={toast} setPage={goPage}/>}
+      {page==="dashboard"&&custAuth&&<Dashboard custAuth={custAuth} setPage={goPage} toast={toast} onLogout={handleCustLogout}/>}
+      {page==="admin"&&adminAuth&&<Admin toast={toast} onLogout={handleAdminLogout}/>}
+    </main>
+    {page!=="admin"&&<Footer setPage={goPage} toast={toast}/>}
+    {page!=="admin"&&<a className="wa-float" href="https://wa.me/918519859829?text=Hello, I am interested in your blouse designs!" target="_blank" rel="noreferrer">💬</a>}
+    <div className={"toast"+(show?" show":"")}>{msg}</div>
+  </div>);
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App/>);
+</script>
+</body>
+</html>
